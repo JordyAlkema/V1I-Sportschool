@@ -100,6 +100,7 @@ CREATE TABLE `users` (
   `voornaam` varchar(45) NOT NULL,
   `tussenvoegsel` varchar(45) DEFAULT NULL,
   `achternaam` varchar(45) NOT NULL,
+  `wachtwoord` varchar(188) NOT NULL,
   `geboortedatum` date NOT NULL,
   `pasnummer` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)

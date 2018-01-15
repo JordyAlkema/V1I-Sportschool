@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string('voornaam', 45);
 			$table->string('tussenvoegsel', 45)->nullable();
 			$table->string('achternaam', 45);
+			$table->string('wachtwoord', 188);
 			$table->date('geboortedatum');
 			$table->string('pasnummer', 45)->nullable();
 		});
