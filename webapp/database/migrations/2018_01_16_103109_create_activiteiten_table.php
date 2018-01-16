@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateActiviteitTable extends Migration {
+class CreateActiviteitenTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateActiviteitTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('activiteit', function(Blueprint $table)
+		Schema::create('activiteiten', function(Blueprint $table)
 		{
 			$table->integer('id', true);
 			$table->integer('user_id')->nullable()->index('user_idx');
@@ -30,7 +30,7 @@ class CreateActiviteitTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('activiteit');
+		Schema::drop('activiteiten');
 	}
 
 }

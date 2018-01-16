@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 15 Jan 2018 13:24:24 +0000.
+ * Date: Tue, 16 Jan 2018 10:32:17 +0000.
  */
 
 namespace App\Models;
@@ -10,7 +10,7 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Activiteit
+ * Class Activiteiten
  * 
  * @property int $id
  * @property int $user_id
@@ -18,15 +18,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $begin_datum
  * @property \Carbon\Carbon $eind_datum
  * 
- * @property \App\Models\Automaat $automaat
- * @property \App\Models\User $user
+ * @property \App\Models\Automaat $automaten
+ * @property \App\Models\Gebruiker $gebruiker
  * @property \Illuminate\Database\Eloquent\Collection $transacties
  *
  * @package App\Models
  */
-class Activiteit extends Eloquent
+class Activiteiten extends Eloquent
 {
-	protected $table = 'activiteit';
+	protected $table = 'activiteiten';
 	public $timestamps = false;
 
 	protected $casts = [
@@ -46,18 +46,18 @@ class Activiteit extends Eloquent
 		'eind_datum'
 	];
 
-	public function automaat()
+	public function automaten()
 	{
-		return $this->belongsTo(Automaat::class);
+		return $this->belongsTo(Automaat::class, 'automaat_id');
 	}
 
-	public function user()
+	public function gebruiker()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo(Gebruiker::class, 'user_id');
 	}
 
 	public function transacties()
 	{
-		return $this->hasMany(Transactie::class);
+		return $this->hasMany(Transactie::class, 'activiteit_id');
 	}
 }
