@@ -4,7 +4,7 @@
 Benno's Sportschool
 </p>
 <p align="center">
-  <img width="650" align="center" src="https://github.com/JordyAlkema/V1I-Sportschool/blob/master/logo.png">
+  <img width="200" align="center" src="https://github.com/JordyAlkema/V1I-Sportschool/blob/master/logo.png">
 </p>
 ----
 
