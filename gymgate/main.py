@@ -3,10 +3,48 @@
 import RPi.GPIO as GPIO
 import MFRC522
 import signal
+import Adafruit_CharLCD as LCD
 
-#from src.nfc import NFC
+#
+# import mysql.connector
+#
+# config = {
+#   'user': 'scott',
+#   'password': 'password',
+#   'host': '127.0.0.1',
+#   'database': 'employees',
+#   'raise_on_warnings': True,
+#   'use_pure': False,
+# }
+#
+# cnx = mysql.connector.connect(**config)
+#
+# cnx.close()
+
 
 continue_reading = True
+
+
+# Raspberry Pi pin configuration:
+lcd_rs        = 25
+lcd_en        = 24
+lcd_d4        = 23
+lcd_d5        = 17
+lcd_d6        = 18
+lcd_d7        = 22
+lcd_backlight = 1
+
+# Define LCD column and row size for 16x2 LCD.
+lcd_columns = 16
+lcd_rows    = 2
+
+# Initialize the LCD using the pins above.
+lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
+                           lcd_columns, lcd_rows, lcd_backlight)
+
+# Print a two line message
+lcd.message('Hello!\nraspberrytips.nl')
+
 
 # Capture SIGINT for cleanup when the script is aborted
 def end_read(signal,frame):
@@ -39,5 +77,5 @@ while continue_reading:
 
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
-        print str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3]) 
+        print str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3])
 
