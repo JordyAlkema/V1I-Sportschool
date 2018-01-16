@@ -16,9 +16,9 @@ class CreateLocatiesTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('naam', 45);
-			$table->string('Stad', 45);
-			$table->string('Straat', 45);
-			$table->string('Huisnummer', 45);
+			$table->string('stad', 45);
+			$table->string('straat', 45);
+			$table->string('huisnummer', 45);
 		});
 	}
 

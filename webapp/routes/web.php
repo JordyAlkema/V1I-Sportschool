@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+    /**
+     * Login
+     */
+    Route::get('/login', 'AuthController@loginView')->name('loginView');
+    Route::post('/login', 'AuthController@login')->name('login');
+
+    /**
+     * Register
+     */

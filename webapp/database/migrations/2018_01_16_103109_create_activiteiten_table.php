@@ -15,7 +15,7 @@ class CreateActiviteitenTable extends Migration {
 		Schema::create('activiteiten', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->integer('user_id')->nullable()->index('user_idx');
+			$table->integer('user_id')->index('user_idx');
 			$table->integer('automaat_id')->nullable()->index('automaat_idx');
 			$table->dateTime('begin_datum');
 			$table->dateTime('eind_datum')->nullable();
