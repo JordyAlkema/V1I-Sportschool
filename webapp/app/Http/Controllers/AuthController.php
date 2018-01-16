@@ -23,9 +23,20 @@ class AuthController extends Controller
         if (Hash::check($request['password'], $gebruiker['wachtwoord'])) {
             Auth::login($gebruiker);
 
-            return redirect()->route('dashboard')->with('welcome', 'Welkom, Succesvol ingelogd!');
+            if(isset($gebruiker['tussenvoegsel'])) {
+                $name = $gebruiker['voornaam'] . ' ' . $gebruiker['tussenvoegsel'] . ' ' .  $gebruiker['achternaam'];
+            }else{
+                $name = $gebruiker['voornaam'] . ' ' .  $gebruiker['achternaam'];
+            }
+            return redirect()->route('dashboard')->with('welcome', 'Welkom terug ' . $name . '!');
         }else{
             return redirect()->route('login')->with('error', 'Combinatie is niet correct!');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('error', 'U bent uitgelogd!');
     }
 }

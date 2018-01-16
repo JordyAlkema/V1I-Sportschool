@@ -38,7 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'gebruiker',
+        ],
+
+        'medewerker' => [
+            'driver' => 'session',
+            'provider' => 'medewerker',
         ],
 
         'api' => [
@@ -65,9 +70,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'gebruiker' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\Gebruiker::class,
+        ],
+        'medewerker' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Medewerker::class,
         ],
 
         // 'users' => [

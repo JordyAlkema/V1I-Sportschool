@@ -128,6 +128,16 @@
         demo.initDashboardPageCharts();
 
     });
+
+    @if (session('welcome'))
+    $.notify({
+        message: '{{ session('welcome') }}'
+    },{
+        type: 'success'
+    });
+    @endif
+
+
 </script>
 
 </html>

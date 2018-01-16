@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return \Illuminate\Support\Facades\Auth::user();
 });
 
     /**
@@ -22,5 +22,13 @@ Route::get('/', function () {
     Route::post('/login', 'AuthController@login')->name('login');
 
     /**
-     * Register
+     * logout
      */
+    Route::get('/logout', 'AuthController@logout')->name('logout');
+
+    /**
+     * Dashboard
+     */
+    Route::group(['middleware' => ['AuthGebruiker']], function () {
+        Route::get('/app/', 'DashboardController@homeView')->name('dashboard');
+    });

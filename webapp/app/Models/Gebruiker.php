@@ -6,7 +6,8 @@
  */
 
 namespace App\Models;
-
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -25,8 +26,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class Gebruiker extends Eloquent
+class Gebruiker extends Eloquent implements Authenticatable
 {
+    use AuthenticableTrait;
+
 	public $timestamps = false;
 
 	protected $dates = [

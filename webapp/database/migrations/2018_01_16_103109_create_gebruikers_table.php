@@ -19,8 +19,10 @@ class CreateGebruikersTable extends Migration {
 			$table->string('tussenvoegsel', 45)->nullable();
 			$table->string('achternaam', 45);
 			$table->string('email', 80);
+			$table->string('wachtwoord', 80);
 			$table->date('geboortedatum');
 			$table->string('pasnummer', 45)->nullable();
+			$table->string('remember_token', 100)->nullable();
 		});
 	}
 

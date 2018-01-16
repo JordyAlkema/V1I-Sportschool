@@ -41,4 +41,11 @@
             <p>Notifications</p>
         </a>
     </li>
+    <li>
+        <a href="{{ route('logout') }}">
+            <i class="material-icons text-gray">exit_to_app</i>
+            <p>Uitloggen</p>
+        </a>
+    </li>
 </ul>
+
