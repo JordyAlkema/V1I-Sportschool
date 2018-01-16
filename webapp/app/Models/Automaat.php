@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 15 Jan 2018 13:24:24 +0000.
+ * Date: Tue, 16 Jan 2018 10:32:17 +0000.
  */
 
 namespace App\Models;
@@ -10,34 +10,52 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Automaat
+ * Class Automaten
  * 
  * @property int $id
  * @property string $naam
  * @property float $bedrag_per_minuut
+ * @property int $locatie_id
+ * @property int $automaat_type_id
  * 
- * @property \Illuminate\Database\Eloquent\Collection $activiteits
+ * @property \App\Models\Automaattype $automaattype
+ * @property \App\Models\Locatie $locaty
+ * @property \Illuminate\Database\Eloquent\Collection $activiteitens
  *
  * @package App\Models
  */
 class Automaat extends Eloquent
 {
-	protected $table = 'automaat';
+	protected $table = 'automaten';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'int',
-		'bedrag_per_minuut' => 'float'
+		'bedrag_per_minuut' => 'float',
+		'locatie_id' => 'int',
+		'automaat_type_id' => 'int'
 	];
 
 	protected $fillable = [
 		'naam',
-		'bedrag_per_minuut'
+		'bedrag_per_minuut',
+		'locatie_id',
+		'automaat_type_id'
 	];
 
-	public function activiteiten()
+	public function automaattype()
 	{
-		return $this->hasMany(Activiteit::class);
+		return $this->belongsTo(Automaattype::class, 'automaat_type_id');
+	}
+
+	public function locaty()
+	{
+		return $this->belongsTo(Locatie::class, 'locatie_id');
+	}
+
+	public function activiteitens()
+	{
+		return $this->hasMany(Activiteiten::class, 'automaat_id');
 	}
 }

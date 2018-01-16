@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAutomaatTable extends Migration {
+class CreateLocatiesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateAutomaatTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('automaat', function(Blueprint $table)
+		Schema::create('locaties', function(Blueprint $table)
 		{
-			$table->integer('id')->primary();
+			$table->integer('id', true);
 			$table->string('naam', 45);
-			$table->float('bedrag_per_minuut', 10, 0);
+			$table->string('Stad', 45);
+			$table->string('Straat', 45);
+			$table->string('Huisnummer', 45);
 		});
 	}
 
@@ -28,7 +30,7 @@ class CreateAutomaatTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('automaat');
+		Schema::drop('locaties');
 	}
 
 }

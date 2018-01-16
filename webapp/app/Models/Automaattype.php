@@ -10,18 +10,18 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Transactietype
+ * Class Automaattype
  * 
  * @property int $id
  * @property string $naam
  * 
- * @property \Illuminate\Database\Eloquent\Collection $transacties
+ * @property \Illuminate\Database\Eloquent\Collection $automatens
  *
  * @package App\Models
  */
-class Transactietype extends Eloquent
+class Automaattype extends Eloquent
 {
-	protected $table = 'transactietype';
+	protected $table = 'automaattype';
 	public $incrementing = false;
 	public $timestamps = false;
 
@@ -33,8 +33,8 @@ class Transactietype extends Eloquent
 		'naam'
 	];
 
-	public function transacties()
+	public function automaten()
 	{
-		return $this->hasMany(Transactie::class, 'transactieType_id');
+		return $this->hasMany(Automaat::class, 'automaat_type_id');
 	}
 }

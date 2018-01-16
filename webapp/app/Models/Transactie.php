@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 15 Jan 2018 13:24:25 +0000.
+ * Date: Tue, 16 Jan 2018 10:32:17 +0000.
  */
 
 namespace App\Models;
@@ -19,9 +19,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $datum
  * @property int $activiteit_id
  * 
- * @property \App\Models\Activiteit $activiteit
+ * @property \App\Models\Activiteiten $activiteiten
  * @property \App\Models\Transactietype $transactietype
- * @property \App\Models\User $user
+ * @property \App\Models\Gebruiker $gebruiker
  *
  * @package App\Models
  */
@@ -48,9 +48,9 @@ class Transactie extends Eloquent
 		'activiteit_id'
 	];
 
-	public function activiteit()
+	public function activiteiten()
 	{
-		return $this->belongsTo(Activiteit::class);
+		return $this->belongsTo(Activiteiten::class, 'activiteit_id');
 	}
 
 	public function transactietype()
@@ -58,8 +58,8 @@ class Transactie extends Eloquent
 		return $this->belongsTo(Transactietype::class, 'transactieType_id');
 	}
 
-	public function user()
+	public function gebruiker()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo(Gebruiker::class, 'user_id');
 	}
 }

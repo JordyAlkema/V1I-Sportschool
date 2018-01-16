@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 15 Jan 2018 13:24:25 +0000.
+ * Date: Tue, 16 Jan 2018 10:32:17 +0000.
  */
 
 namespace App\Models;
@@ -10,7 +10,7 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class User
+ * Class Gebruiker
  * 
  * @property int $id
  * @property string $voornaam
@@ -19,12 +19,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $geboortedatum
  * @property string $pasnummer
  * 
- * @property \Illuminate\Database\Eloquent\Collection $activiteits
+ * @property \Illuminate\Database\Eloquent\Collection $activiteitens
+ * @property \Illuminate\Database\Eloquent\Collection $afspraaks
  * @property \Illuminate\Database\Eloquent\Collection $transacties
  *
  * @package App\Models
  */
-class User extends Eloquent
+class Gebruiker extends Eloquent
 {
 	public $timestamps = false;
 
@@ -42,11 +43,16 @@ class User extends Eloquent
 
 	public function activiteiten()
 	{
-		return $this->hasMany(Activiteit::class);
+		return $this->hasMany(Activiteiten::class, 'user_id');
+	}
+
+	public function afspraaken()
+	{
+		return $this->hasMany(Afspraak::class, 'user_id');
 	}
 
 	public function transacties()
 	{
-		return $this->hasMany(Transactie::class);
+		return $this->hasMany(Transactie::class, 'user_id');
 	}
 }
