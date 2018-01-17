@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -46,7 +47,7 @@ class Activiteiten extends Eloquent
 		'eind_datum'
 	];
 
-	public function automaten()
+	public function automaat()
 	{
 		return $this->belongsTo(Automaat::class, 'automaat_id');
 	}
@@ -59,5 +60,16 @@ class Activiteiten extends Eloquent
 	public function transacties()
 	{
 		return $this->hasMany(Transactie::class, 'activiteit_id');
+	}
+
+    public function getTijdAttribute()
+    {
+        if($this->eind_datum == null){
+            $tijd = "Bezig met activiteit";
+        }else{
+            $tijd = $this->begin_datum->diffInMinutes($this->eind_datum) . " Minuten";
+        }
+
+        return $tijd;
 	}
 }

@@ -14,36 +14,18 @@
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
                         <thead class="text-warning">
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Salary</th>
-                        <th>Country</th>
+                        <th>Machine</th>
+                        <th>Begintijd</th>
+                        <th>Tijd op machine</th>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Dakota Rice</td>
-                            <td>$36,738</td>
-                            <td>Niger</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minerva Hooper</td>
-                            <td>$23,789</td>
-                            <td>Curaçao</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Sage Rodriguez</td>
-                            <td>$56,142</td>
-                            <td>Netherlands</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Philip Chaney</td>
-                            <td>$38,735</td>
-                            <td>Korea, South</td>
-                        </tr>
+                        @foreach($activiteiten as $activiteit)
+                            <tr>
+                                <td>{{$activiteit->automaat->automaattype->naam}}</td>
+                                <td>{{$activiteit->begin_datum}}</td>
+                                <td>{{$activiteit->tijd}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -58,36 +40,24 @@
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
                         <thead class="text-warning">
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Salary</th>
-                        <th>Country</th>
+                        <th>Type transactie</th>
+                        <th>Bedrag</th>
+                        <th>datum</th>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Dakota Rice</td>
-                            <td>$36,738</td>
-                            <td>Niger</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minerva Hooper</td>
-                            <td>$23,789</td>
-                            <td>Curaçao</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Sage Rodriguez</td>
-                            <td>$56,142</td>
-                            <td>Netherlands</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Philip Chaney</td>
-                            <td>$38,735</td>
-                            <td>Korea, South</td>
-                        </tr>
+                        @foreach($transacties as $transactie)
+                            <tr>
+                                <td>{{$transactie->transactietype->naam}}</td>
+
+                                @if($transactie->bedrag > 0)
+                                    <td class="text-success">{{number_format($transactie->bedrag, 2)}}</td>
+                                @else
+                                    <td class="text-danger">{{number_format($transactie->bedrag, 2)}}</td>
+                                @endif
+
+                                <td>{{$transactie->datum}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
