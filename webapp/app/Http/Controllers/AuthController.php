@@ -28,7 +28,7 @@ class AuthController extends Controller
             }else{
                 $name = $gebruiker['voornaam'] . ' ' .  $gebruiker['achternaam'];
             }
-            return redirect()->route('dashboard')->with('welcome', 'Welkom terug ' . $name . '!');
+            return redirect()->route('dashboard')->with('success', 'Welkom terug ' . $name . '!');
         }else{
             return redirect()->route('login')->with('error', 'Combinatie is niet correct!');
         }
