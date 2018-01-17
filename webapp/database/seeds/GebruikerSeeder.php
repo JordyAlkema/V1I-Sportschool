@@ -15,7 +15,7 @@ class GebruikerSeeder extends Seeder
         DB::table('gebruikers')->insert([
             'voornaam' => 'John',
             'achternaam' => 'Doe',
-            'email' => 'JohnDoe@example.com',
+            'email' => 'johndoe@example.com',
             'wachtwoord' => Hash::make('Welkom01'),
             'geboortedatum' => \Carbon\Carbon::now()->subYears(21),
             'pasnummer' => '28357877892',
