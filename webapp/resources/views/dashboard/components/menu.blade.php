@@ -5,22 +5,28 @@
             <p>Dashboard</p>
         </a>
     </li>
-    <li {{ (Route::currentRouteName() == 'dashboard.account' ? 'class=active' : '') }}>
-        <a href="{{ route('dashboard.account') }}">
-            <i class="material-icons">person</i>
-            <p>Mijn account</p>
-        </a>
-    </li>
     <li {{ (Route::currentRouteName() == 'dashboard.activity' ? 'class=active' : '') }}>
         <a href="{{ route('dashboard.activity') }}">
             <i class="material-icons">directions_run</i>
             <p>Activiteit</p>
         </a>
     </li>
-    <li>
-        <a href="{{ route('logout') }}">
-            <i class="material-icons text-gray">exit_to_app</i>
-            <p>Uitloggen</p>
+    <li {{ (Route::currentRouteName() == 'dashboard.account' ? 'class=active' : '') }}>
+        <a href="{{ route('dashboard.account') }}">
+            <i class="material-icons">person</i>
+            <p>Mijn account</p>
+        </a>
+    </li>
+    <li {{ (Route::currentRouteName() == 'dashboard.card' ? 'class=active' : '') }}>
+        <a href="{{ route('dashboard.card') }}">
+            <i class="material-icons">credit_card</i>
+            <p>Mijn Pas</p>
+        </a>
+    </li>
+    <li {{ (Route::currentRouteName() == 'dashboard.locations' ? 'class=active' : '') }}>
+        <a href="{{ route('dashboard.locations') }}">
+            <i class="material-icons">add_location</i>
+            <p>Locaties</p>
         </a>
     </li>
 </ul>

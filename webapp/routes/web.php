@@ -39,4 +39,7 @@ Route::get('/', function () {
 
         Route::get('/app/my-card', 'DashboardController@homeView')->name('dashboard.card');
 
+
+        Route::get('/app/locations', 'DashboardController@homeView')->name('dashboard.locations');
+
     });
