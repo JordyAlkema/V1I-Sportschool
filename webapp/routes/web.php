@@ -30,5 +30,13 @@ Route::get('/', function () {
      * Dashboard
      */
     Route::group(['middleware' => ['AuthGebruiker']], function () {
+
         Route::get('/app/', 'DashboardController@homeView')->name('dashboard');
+
+        Route::get('/app/my-account', 'DashboardController@homeView')->name('dashboard.account');
+
+        Route::get('/app/activity', 'DashboardController@homeView')->name('dashboard.activity');
+
+        Route::get('/app/my-card', 'DashboardController@homeView')->name('dashboard.card');
+
     });
