@@ -1,9 +1,9 @@
 @extends('dashboard.blank')
 
-@section('page_title', 'Overzicht')
+@section('page_title', 'Dashboard')
 
 @section('content')
-    <h2>Overzicht</h2>
+    {{--<h2>Welkom, </h2>--}}
     <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card">

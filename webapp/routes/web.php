@@ -37,7 +37,7 @@ Route::get('/', function () {
 
         Route::get('/app/activity', 'DashboardController@homeView')->name('dashboard.activity');
 
-        Route::get('/app/my-card', 'DashboardController@homeView')->name('dashboard.card');
+        Route::get('/app/my-card', 'DashboardController@gymCardView')->name('dashboard.card');
 
 
         Route::get('/app/locations', 'DashboardController@homeView')->name('dashboard.locations');

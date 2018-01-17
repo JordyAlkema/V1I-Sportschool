@@ -12,4 +12,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.pages.home')->with('user', Auth::user());
     }
+
+    public function gymCardView()
+    {
+        return view('dashboard.pages.gymcard')->with('user', Auth::user());
+    }
 }
