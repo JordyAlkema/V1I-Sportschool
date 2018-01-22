@@ -51,27 +51,28 @@ while continue_reading:
     if status == MIFAREReader.MI_OK:
         print("Card detected")
 
-    cursor_query_user = cnx.cursor(buffered=True)
-    cursor_insert_activity = cnx.cursor(buffered=True)
-
     # Get the UID of the card
     (status, uid) = MIFAREReader.MFRC522_Anticoll()
 
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
+        # Turn on the light
+        # @todo: make function of this to toggle
         LED_red.turn_on()
 
-        number = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+        cursor_query_user = cnx.cursor(buffered=True)
+        cursor_insert_activity = cnx.cursor(buffered=True)
+
+        card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
         query_user = (
             "SELECT id FROM gebruikers WHERE pasnummer = %s"
         )
 
-        cursor_query_user.execute(query_user, (number,))
+        cursor_query_user.execute(query_user, (card_uid,))
         data_query_user = cursor_query_user.fetchall()
-
         user_id = data_query_user[0][0]
-
+        print(user_id)
 
         # insert_activity = (
         #     "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
