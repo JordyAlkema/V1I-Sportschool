@@ -29,6 +29,12 @@
             <p>Mijn Pas</p>
         </a>
     </li>
+    <li {{ (Route::currentRouteName() == 'dashboard.personalCoach' ? 'class=active' : '') }}>
+        <a href="{{ route('dashboard.personalCoach') }}">
+            <i class="material-icons">credit_card</i>
+            <p>Personal coach</p>
+        </a>
+    </li>
     <li {{ (Route::currentRouteName() == 'dashboard.locations' ? 'class=active' : '') }}>
         <a href="{{ route('dashboard.locations') }}">
             <i class="material-icons">add_location</i>

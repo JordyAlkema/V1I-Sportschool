@@ -19,7 +19,11 @@ class DashboardController extends Controller
         $activiteiten = Activiteiten::where('user_id', $gebruiker['id'])->orderby('begin_datum', 'DESC')->limit(3)->get();
         $latestTransaction = Transactie::where('user_id', $gebruiker['id'])->orderby('datum', 'DESC')->first();
 
-        $latestTransaction = $latestTransaction->datum->toDateString();
+        if($latestTransaction){
+            $latestTransaction = $latestTransaction->datum->toDateString();
+        }else{
+            $latestTransaction = '';
+        }
 
         return view('dashboard.pages.home')
             ->with('user', $gebruiker)
@@ -61,5 +65,10 @@ class DashboardController extends Controller
 
         return view('dashboard.pages.ActivityTransaction')->with('transaction', $transaction);
 
+    }
+
+    public function personalCoachView()
+    {
+        return view('dashboard.pages.contactPersonalCoach');
     }
 }

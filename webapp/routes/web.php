@@ -43,6 +43,8 @@ Route::get('/', function () {
 
         Route::get('/app/transactie/{id}', 'DashboardController@activityTransaction')->name('dashboard.transaction');
 
+        Route::get('/app/coach', 'DashboardController@personalCoachView')->name('dashboard.personalCoach');
+
         Route::get('/app/locations', 'DashboardController@homeView')->name('dashboard.locations');
 
         /**
