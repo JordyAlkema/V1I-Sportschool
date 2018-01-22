@@ -78,6 +78,6 @@ while continue_reading:
         # )
         # cursor_insert_activity.execute(insert_activity, (AUTOMAAT_ID, ))
     else:
-        red.turn_off()
+        LED_red.turn_off()
 
     time.sleep(5)
