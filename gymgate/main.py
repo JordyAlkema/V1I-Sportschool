@@ -5,96 +5,72 @@ import time
 import MFRC522
 import signal
 from src.LED import LED
-import mysql.connector
-
-config = {
-    'user': 'root',
-    'password': '',
-    'host': '192.168.42.7',
-    'database': 'sportschool',
-    'raise_on_warnings': True,
-}
+from src.repository import gymgate_repository
 
 AUTOMAAT_ID = 1
 
-cnx = mysql.connector.connect(**config)
-continue_reading = True
+
+def format_card_uid(uid):
+    return str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
 
-# Capture SIGINT for cleanup when the script is aborted
-def end_read(signal, frame):
-    global continue_reading
-    print("Ctrl+C captured, ending read.")
-    continue_reading = False
+class GymGate:
+    def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
 
-    cnx.close()
-    GPIO.cleanup()
+        self.gymgate_repository = gymgate_repository.GymgateRepository()
+        self.is_running = True
+        self.MIFAREReader = MFRC522.MFRC522()
+        self.LED_red = LED(GPIO, 12)
+
+        signal.signal(signal.SIGINT, self.close_program)
+
+        print("Gymgate scanner")
+        print("Press Ctrl-C to stop.")
+
+        self.start_program()
+
+    def start_program(self):
+        while self.is_running:
+            # Scan for cards
+            (status, TagType) = self.MIFAREReader.MFRC522_Request(self.MIFAREReader.PICC_REQIDL)
+
+            if status == self.MIFAREReader.MI_OK:
+                print("Card detected")
+
+            # Get the UID of the card
+            (status, uid) = self.MIFAREReader.MFRC522_Anticoll()
+
+            # If we have the UID, continue
+            if status == self.MIFAREReader.MI_OK:
+                # Turn on the light
+                self.LED_red.turn_on()
+
+                card_uid = format_card_uid(uid)
+                user_id = self.gymgate_repository.get_user_id_by_card_uid(card_uid)
+
+                # Check if card is not connected to any accounts
+                if user_id is None:
+                    continue
+
+                running_activity = self.gymgate_repository.get_running_activity_by_user_id(user_id)
+
+                # Check if has activity and is on the same machine.
+                if running_activity is not None and running_activity[2] == AUTOMAAT_ID:
+                    self.gymgate_repository.finish_activity(running_activity[0])
+                elif running_activity is None:
+                    self.gymgate_repository.add_activity(user_id, AUTOMAAT_ID)
+
+                time.sleep(5)
+
+            else:
+                self.LED_red.turn_off()
+
+    def close_program(self, signal, frame):
+        print("Ctrl+C captured, ending read.")
+        self.is_running = False
+        self.gymgate_repository.close_database()
+        GPIO.cleanup()
 
 
-# Hook the SIGINT
-signal.signal(signal.SIGINT, end_read)
-
-# Create an object of the class MFRC522
-MIFAREReader = MFRC522.MFRC522()
-
-GPIO.setmode(GPIO.BOARD)
-
-LED_red = LED(GPIO, 12)
-
-print("Gymgate scanner")
-print("Press Ctrl-C to stop.")
-
-while continue_reading:
-    # Scan for cards
-    (status, TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
-
-    if status == MIFAREReader.MI_OK:
-        print("Card detected")
-
-    # Get the UID of the card
-    (status, uid) = MIFAREReader.MFRC522_Anticoll()
-
-    # If we have the UID, continue
-    if status == MIFAREReader.MI_OK:
-        # Turn on the light
-        # @todo: make function of this to toggle
-        LED_red.turn_on()
-
-        card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
-
-        # MySQL
-        cursor_query_user = cnx.cursor(buffered=True)
-        cursor_insert_activity = cnx.cursor(buffered=True)
-        cursor_query_for_running_activity_by_user_id = cnx.cursor(buffered=True)
-
-        # Request user
-        query_user = (
-            "SELECT id FROM gebruikers WHERE pasnummer = %s"
-        )
-        cursor_query_user.execute(query_user, (card_uid,))
-        data_query_user = cursor_query_user.fetchone()
-        user_id = data_query_user[0]
-
-        query_for_running_activity_by_user_id = (
-            "SELECT * FROM activiteiten WHERE `user_id` = %s and `eind_datum` is NULL"
-        )
-
-        cursor_query_for_running_activity_by_user_id.execute(query_for_running_activity_by_user_id, (user_id,))
-
-        data_query_for_running_activity_by_user_id = cursor_query_for_running_activity_by_user_id.fetchall()
-
-        amount_of_activities = len(data_query_for_running_activity_by_user_id)
-
-        print("amount of activity: " + str(amount_of_activities))
-        print(user_id)
-
-        if (amount_of_activities > 0):
-            insert_activity = (
-                "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
-            )
-            cursor_insert_activity.execute(insert_activity, (user_id, AUTOMAAT_ID,))
-
-    else:
-        LED_red.turn_off()
-
-    time.sleep(5)
+GymGate()
