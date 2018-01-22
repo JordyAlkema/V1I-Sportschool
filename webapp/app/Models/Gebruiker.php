@@ -67,6 +67,12 @@ class Gebruiker extends Eloquent implements Authenticatable
             $sumArray[] = $transactie['bedrag'];
         }
 
-        return array_sum($sumArray);
+        $sum = array_sum($sumArray);
+
+        if(!$sum){
+            $sum = 0;
+        }
+
+        return $sum;
     }
 }
