@@ -11,11 +11,6 @@ AUTOMAAT_ID = 1
 
 
 class GymGate:
-    gymgate_repository: gymgate_repository.GymgateRepository
-    is_running: bool
-    MIFAREReader: MFRC522.MFRC522
-    LED_red: LED
-
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
 
