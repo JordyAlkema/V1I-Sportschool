@@ -58,4 +58,15 @@ class Gebruiker extends Eloquent implements Authenticatable
 	{
 		return $this->hasMany(Transactie::class, 'user_id');
 	}
+
+	public function getBalanceAttribute(){
+	    $transacties = $this->transacties;
+
+        $sumArray = [];
+        foreach ($transacties as $transactie){
+            $sumArray[] = $transactie['bedrag'];
+        }
+
+        return array_sum($sumArray);
+    }
 }
