@@ -14,12 +14,12 @@ class CreateTransactiesTable extends Migration {
 	{
 		Schema::create('transacties', function(Blueprint $table)
 		{
-			$table->integer('id', true);
-			$table->integer('user_id')->index('user_idx');
-			$table->integer('transactieType_id')->index('type_idx');
+			$table->increments('id');
+			$table->integer('user_id')->unsigned()->index('user_idx');
+			$table->integer('transactieType_id')->unsigned()->index('type_idx');
 			$table->float('bedrag', 10, 0)->nullable();
 			$table->date('datum');
-			$table->integer('activiteit_id')->nullable()->index('activiteit_idx');
+			$table->integer('activiteit_id')->unsigned()->nullable()->index('activiteit_idx');
 		});
 	}
 

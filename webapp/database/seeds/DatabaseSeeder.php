@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        factory(\App\Models\Automaattype::class)->create([
+            'naam' => 'Afschrijving',
+        ]);
+
+        factory(\App\Models\Automaattype::class)->create([
+            'naam' => 'Bijschrijving',
+        ]);
+
         $this->call([
             GebruikerSeeder::class
         ]);

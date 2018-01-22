@@ -14,9 +14,9 @@ class CreateAfspraakTable extends Migration {
 	{
 		Schema::create('afspraak', function(Blueprint $table)
 		{
-			$table->integer('id', true);
-			$table->integer('medewerker_id')->index('afspraak_medewerker_idx');
-			$table->integer('user_id')->index('afspraak_user_idx');
+			$table->increments('id', true);
+			$table->integer('medewerker_id')->unsigned()->index('afspraak_medewerker_idx');
+			$table->integer('user_id')->unsigned()->index('afspraak_user_idx');
 			$table->dateTime('email_verstuurd')->nullable();
 		});
 	}

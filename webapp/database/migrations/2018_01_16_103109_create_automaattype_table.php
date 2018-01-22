@@ -14,7 +14,7 @@ class CreateAutomaattypeTable extends Migration {
 	{
 		Schema::create('automaattype', function(Blueprint $table)
 		{
-			$table->integer('id')->primary();
+			$table->increments('id');
 			$table->string('naam', 45)->nullable();
 		});
 	}

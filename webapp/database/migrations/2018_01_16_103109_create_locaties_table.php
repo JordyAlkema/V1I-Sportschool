@@ -14,7 +14,7 @@ class CreateLocatiesTable extends Migration {
 	{
 		Schema::create('locaties', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->increments('id');
 			$table->string('naam', 45);
 			$table->string('stad', 45);
 			$table->string('straat', 45);

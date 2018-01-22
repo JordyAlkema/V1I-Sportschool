@@ -25,10 +25,6 @@ class Automaattype extends Eloquent
 	public $incrementing = false;
 	public $timestamps = false;
 
-	protected $casts = [
-		'id' => 'int'
-	];
-
 	protected $fillable = [
 		'naam'
 	];

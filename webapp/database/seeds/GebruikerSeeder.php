@@ -12,13 +12,14 @@ class GebruikerSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('gebruikers')->insert([
-            'voornaam' => 'John',
-            'achternaam' => 'Doe',
-            'email' => 'johndoe@example.com',
-            'wachtwoord' => Hash::make('Welkom01'),
-            'geboortedatum' => \Carbon\Carbon::now()->subYears(21),
-            'pasnummer' => '28357877892',
-        ]);
+        factory(\App\Models\Gebruiker::class, 12)
+            ->create()
+            ->each(function ($gebruiker){
+                factory(\App\Models\Activiteiten::class, 4)->create(
+                    [
+                        'user_id' => $gebruiker['id']
+                    ]
+                );
+            });
     }
 }

@@ -14,11 +14,11 @@ class CreateAutomatenTable extends Migration {
 	{
 		Schema::create('automaten', function(Blueprint $table)
 		{
-			$table->integer('id')->primary();
+			$table->increments('id');
 			$table->string('naam', 45);
 			$table->float('bedrag_per_minuut', 10, 0);
-			$table->integer('locatie_id')->nullable()->index('locatie_idx');
-			$table->integer('automaat_type_id')->index('AutomaatType_idx');
+			$table->integer('locatie_id')->unsigned()->nullable()->index('locatie_idx');
+			$table->integer('automaat_type_id')->unsigned()->index('AutomaatType_idx');
 		});
 	}
 

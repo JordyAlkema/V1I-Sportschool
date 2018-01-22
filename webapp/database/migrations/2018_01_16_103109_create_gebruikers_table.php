@@ -14,11 +14,11 @@ class CreateGebruikersTable extends Migration {
 	{
 		Schema::create('gebruikers', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->increments('id');
 			$table->string('voornaam', 45);
 			$table->string('tussenvoegsel', 45)->nullable();
 			$table->string('achternaam', 45);
-			$table->string('email', 80);
+			$table->string('email', 80)->unique();
 			$table->string('wachtwoord', 80);
 			$table->date('geboortedatum');
 			$table->string('pasnummer', 45)->nullable();

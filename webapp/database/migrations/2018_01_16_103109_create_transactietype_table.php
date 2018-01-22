@@ -14,7 +14,7 @@ class CreateTransactietypeTable extends Migration {
 	{
 		Schema::create('transactietype', function(Blueprint $table)
 		{
-			$table->integer('id')->primary();
+			$table->increments('id');
 			$table->string('naam', 45)->nullable();
 		});
 	}
