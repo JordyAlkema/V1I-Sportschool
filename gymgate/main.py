@@ -29,16 +29,15 @@ def end_read(signal, frame):
     cnx.close()
     GPIO.cleanup()
 
-
 # Hook the SIGINT
 signal.signal(signal.SIGINT, end_read)
 
 # Create an object of the class MFRC522
 MIFAREReader = MFRC522.MFRC522()
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
-red = LED(GPIO, 18)
+red = LED(GPIO, 12)
 
 # Welcome message
 print("Welcome to the MFRC522 data read example")
@@ -51,7 +50,6 @@ while continue_reading:
 
     # Get two buffered cursors
     curA = cnx.cursor(buffered=True)
-    curB = cnx.cursor(buffered=True)
 
     # # Iterate through the result of curA
     # for (emp_no, salary, from_date, to_date) in curA:
@@ -74,14 +72,17 @@ while continue_reading:
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
         red.turn_on()
+        
+	number = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+        print(number)
         query_user = (
-            "SELECT user_id FROM gebruikers WHERE pasnr IS %s"
+            "SELECT * FROM gebruikers WHERE pasnummer = %s"
         )
-        curA.execute(query_user, (str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])))
+        curA.execute(query_user, (number,))
+        data = curA.fetchall()
 
-        print(user_id)
+	print(data)
 
-        print(str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3]))
     else:
         red.turn_off()
 
