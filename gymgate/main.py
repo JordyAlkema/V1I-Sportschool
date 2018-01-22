@@ -8,19 +8,19 @@ from src.LED import LED
 import mysql.connector
 
 config = {
-  'user': 'root',
-  'password': '',
-  'host': '192.168.42.7',
-  'database': 'sportschool',
-  'raise_on_warnings': True,
+    'user': 'root',
+    'password': '',
+    'host': '192.168.42.7',
+    'database': 'sportschool',
+    'raise_on_warnings': True,
 }
 
 AUTOMAAT_ID = 1
 
 cnx = mysql.connector.connect(**config)
 
-
 continue_reading = True
+
 
 # Capture SIGINT for cleanup when the script is aborted
 def end_read(signal, frame):
@@ -30,6 +30,7 @@ def end_read(signal, frame):
 
     cnx.close()
     GPIO.cleanup()
+
 
 # Hook the SIGINT
 signal.signal(signal.SIGINT, end_read)
@@ -75,15 +76,14 @@ while continue_reading:
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
         red.turn_on()
-        
-	number = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
-        print(number)
+
+        number = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+
         query_user = (
             "SELECT * FROM gebruikers WHERE pasnummer = %s"
         )
 
-        cursor_query_user.execute(query_user, (str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])))
-
+        cursor_query_user.execute(query_user, (number, ))
         data_query_user = cursor_query_user.fetchall()
 
         print(data_query_user[0])
