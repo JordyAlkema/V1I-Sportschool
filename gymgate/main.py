@@ -80,20 +80,19 @@ while continue_reading:
         number = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
         query_user = (
-            "SELECT * FROM gebruikers WHERE pasnummer = %s"
+            "SELECT id FROM gebruikers WHERE pasnummer = %s"
         )
 
         cursor_query_user.execute(query_user, (number, ))
         data_query_user = cursor_query_user.fetchall()
 
-        print(data_query_user[0])
+        user_id = data_query_user[0][0]
 
 
         # insert_activity = (
         #     "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
         # )
         # cursor_insert_activity.execute(insert_activity, (AUTOMAAT_ID, ))
-
     else:
         red.turn_off()
 
