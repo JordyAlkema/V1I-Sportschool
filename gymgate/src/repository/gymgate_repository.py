@@ -32,4 +32,4 @@ class GymgateRepository:
         self.connection.commit()
 
     def close_database(self):
-        self.connection.close() 
+        self.connection.close()
