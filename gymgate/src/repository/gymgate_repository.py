@@ -19,6 +19,7 @@ class GymgateRepository:
 
     def add_activity(self, user_id, automaat_id):
         cursor = self.connection.cursor(buffered=True)
+        print((user_id, automaat_id,))
         cursor.execute("INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());",
                        (user_id, automaat_id,))
         self.connection.commit()

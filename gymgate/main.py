@@ -24,6 +24,8 @@ class GymGate:
         print("Gymgate scanner")
         print("Press Ctrl-C to stop.")
 
+        self.start_program()
+
     def start_program(self):
         while self.is_running:
             # Scan for cards
