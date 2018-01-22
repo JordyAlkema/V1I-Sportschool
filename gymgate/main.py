@@ -16,8 +16,6 @@ def format_card_uid(uid):
 
 class GymGate:
     def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
-
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
         self.MIFAREReader = MFRC522.MFRC522()
@@ -72,5 +70,7 @@ class GymGate:
         self.gymgate_repository.close_database()
         GPIO.cleanup()
 
+
+GPIO.setmode(GPIO.BOARD)
 
 GymGate()
