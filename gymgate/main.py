@@ -1,57 +1,35 @@
 # -*- coding: utf8 -*-
-
 import RPi.GPIO as GPIO
+import time
+
 import MFRC522
 import signal
-import Adafruit_CharLCD as LCD
+from src.LED import LED
+import mysql.connector
 
-#
-# import mysql.connector
-#
-# config = {
-#   'user': 'scott',
-#   'password': 'password',
-#   'host': '127.0.0.1',
-#   'database': 'employees',
-#   'raise_on_warnings': True,
-#   'use_pure': False,
-# }
-#
-# cnx = mysql.connector.connect(**config)
-#
-# cnx.close()
+config = {
+    'user': 'root',
+    'password': '',
+    'host': '192.168.42.7',
+    'database': 'sportschool',
+    'raise_on_warnings': True,
+}
 
+AUTOMAAT_ID = 1
 
+cnx = mysql.connector.connect(**config)
 continue_reading = True
 
 
-# Raspberry Pi pin configuration:
-lcd_rs        = 25
-lcd_en        = 24
-lcd_d4        = 23
-lcd_d5        = 17
-lcd_d6        = 18
-lcd_d7        = 22
-lcd_backlight = 1
-
-# Define LCD column and row size for 16x2 LCD.
-lcd_columns = 16
-lcd_rows    = 2
-
-# Initialize the LCD using the pins above.
-lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
-                           lcd_columns, lcd_rows, lcd_backlight)
-
-# Print a two line message
-lcd.message('Hello!\nraspberrytips.nl')
-
-
 # Capture SIGINT for cleanup when the script is aborted
-def end_read(signal,frame):
+def end_read(signal, frame):
     global continue_reading
-    print "Ctrl+C captured, ending read."
+    print("Ctrl+C captured, ending read.")
     continue_reading = False
+
+    cnx.close()
     GPIO.cleanup()
+
 
 # Hook the SIGINT
 signal.signal(signal.SIGINT, end_read)
@@ -59,23 +37,51 @@ signal.signal(signal.SIGINT, end_read)
 # Create an object of the class MFRC522
 MIFAREReader = MFRC522.MFRC522()
 
-# Welcome message
-print "Welcome to the MFRC522 data read example"
-print "Press Ctrl-C to stop."
+GPIO.setmode(GPIO.BOARD)
 
-# This loop keeps checking for chips. If one is near it will get the UID and authenticate
+LED_red = LED(GPIO, 12)
+
+print("Gymgate scanner")
+print("Press Ctrl-C to stop.")
+
 while continue_reading:
     # Scan for cards
-    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+    (status, TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
 
-    # If a card is found
     if status == MIFAREReader.MI_OK:
-        print "Card detected"
+        print("Card detected")
 
     # Get the UID of the card
-    (status,uid) = MIFAREReader.MFRC522_Anticoll()
+    (status, uid) = MIFAREReader.MFRC522_Anticoll()
 
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
-        print str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3])
+        # Turn on the light
+        # @todo: make function of this to toggle
+        LED_red.turn_on()
 
+        card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+
+
+        # MySQL
+        cursor_query_user = cnx.cursor(buffered=True)
+        cursor_insert_activity = cnx.cursor(buffered=True)
+
+
+        # Request user
+        query_user = (
+            "SELECT id FROM gebruikers WHERE pasnummer = %s"
+        )
+        cursor_query_user.execute(query_user, (card_uid,))
+        data_query_user = cursor_query_user.fetchall()
+        user_id = data_query_user[0][0]
+        print(user_id)
+
+        # insert_activity = (
+        #     "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
+        # )
+        # cursor_insert_activity.execute(insert_activity, (AUTOMAAT_ID, ))
+    else:
+        LED_red.turn_off()
+
+    time.sleep(5)

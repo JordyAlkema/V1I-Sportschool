@@ -1,4 +1,4 @@
-class NFC:
+class LED:
     def __init__(self, GPIO, pin):
         self.GPIO = GPIO
         self.pin = pin
