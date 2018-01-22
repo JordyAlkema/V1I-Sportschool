@@ -14,7 +14,7 @@ class GymgateRepository:
 
     def get_running_activity_by_user_id(self, user_id):
         cursor = self.connection.cursor(buffered=True)
-        cursor.execute('SELECT * FROM activiteiten WHERE `user_id` = %s and `eind_datum` is NULL', (user_id,))
+        cursor.execute("SELECT * FROM activiteiten WHERE `user_id` = %s and `eind_datum` is NULL;", (user_id,))
         return cursor.fetchone()
 
     def add_activity(self, user_id, automaat_id):
