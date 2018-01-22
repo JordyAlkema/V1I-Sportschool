@@ -62,25 +62,38 @@ while continue_reading:
 
         card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
-
         # MySQL
         cursor_query_user = cnx.cursor(buffered=True)
         cursor_insert_activity = cnx.cursor(buffered=True)
-
+        cursor_query_for_running_activity_by_user_id = cnx.cursor(buffered=True)
 
         # Request user
         query_user = (
             "SELECT id FROM gebruikers WHERE pasnummer = %s"
         )
         cursor_query_user.execute(query_user, (card_uid,))
-        data_query_user = cursor_query_user.fetchall()
-        user_id = data_query_user[0][0]
+        data_query_user = cursor_query_user.fetchone()
+        user_id = data_query_user[0]
+
+        query_for_running_activity_by_user_id = (
+            "SELECT * FROM activiteiten WHERE `user_id` = %s and `eind_datum` is NULL"
+        )
+
+        cursor_query_for_running_activity_by_user_id.execute(query_for_running_activity_by_user_id, (user_id,))
+
+        data_query_for_running_activity_by_user_id = cursor_query_for_running_activity_by_user_id.fetchall()
+
+        amount_of_activities = len(data_query_for_running_activity_by_user_id)
+
+        print("amount of activity: " + str(amount_of_activities))
         print(user_id)
 
-        # insert_activity = (
-        #     "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
-        # )
-        # cursor_insert_activity.execute(insert_activity, (AUTOMAAT_ID, ))
+        if (amount_of_activities > 0):
+            insert_activity = (
+                "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
+            )
+            cursor_insert_activity.execute(insert_activity, (user_id, AUTOMAAT_ID,))
+
     else:
         LED_red.turn_off()
 
