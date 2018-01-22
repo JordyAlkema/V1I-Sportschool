@@ -15,6 +15,8 @@ config = {
   'raise_on_warnings': True,
 }
 
+AUTOMAAT_ID = 1
+
 cnx = mysql.connector.connect(**config)
 
 
@@ -49,7 +51,8 @@ while continue_reading:
     (status, TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
 
     # Get two buffered cursors
-    curA = cnx.cursor(buffered=True)
+    cursor_query_user = cnx.cursor(buffered=True)
+    cursor_insert_activity = cnx.cursor(buffered=True)
 
     # # Iterate through the result of curA
     # for (emp_no, salary, from_date, to_date) in curA:
@@ -78,10 +81,18 @@ while continue_reading:
         query_user = (
             "SELECT * FROM gebruikers WHERE pasnummer = %s"
         )
-        curA.execute(query_user, (number,))
-        data = curA.fetchall()
 
-	print(data)
+        cursor_query_user.execute(query_user, (str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])))
+
+        data_query_user = cursor_query_user.fetchall()
+
+        print(data_query_user[0])
+
+
+        # insert_activity = (
+        #     "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
+        # )
+        # cursor_insert_activity.execute(insert_activity, (AUTOMAAT_ID, ))
 
     else:
         red.turn_off()
