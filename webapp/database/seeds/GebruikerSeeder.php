@@ -19,6 +19,11 @@ class GebruikerSeeder extends Seeder
                     [
                         'user_id' => $gebruiker['id']
                     ]
+                )->each( function($activiteit){
+                    factory(\App\Models\Transactie::class)->create([
+                        'user_id' => $activiteit['user_id']
+                    ]);
+                }
                 );
             });
     }

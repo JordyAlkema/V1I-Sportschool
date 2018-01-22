@@ -11,11 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Automaattype::class)->create([
+        factory(\App\Models\Transactietype::class)->create([
             'naam' => 'Afschrijving',
         ]);
 
-        factory(\App\Models\Automaattype::class)->create([
+        factory(\App\Models\Transactietype::class)->create([
             'naam' => 'Bijschrijving',
         ]);
 
