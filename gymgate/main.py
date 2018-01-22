@@ -60,15 +60,18 @@ while continue_reading:
         # @todo: make function of this to toggle
         LED_red.turn_on()
 
+        card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+
+
+        # MySQL
         cursor_query_user = cnx.cursor(buffered=True)
         cursor_insert_activity = cnx.cursor(buffered=True)
 
-        card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
+        # Request user
         query_user = (
             "SELECT id FROM gebruikers WHERE pasnummer = %s"
         )
-
         cursor_query_user.execute(query_user, (card_uid,))
         data_query_user = cursor_query_user.fetchall()
         user_id = data_query_user[0][0]
