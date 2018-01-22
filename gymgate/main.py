@@ -47,6 +47,9 @@ class GymGate:
 
                 user_id = self.gymgate_repository.get_user_id_by_card_uid(card_uid)
 
+                if user_id is None:
+                    continue
+
                 running_activities = self.gymgate_repository.get_running_activities_by_user_id(user_id)
                 amount_of_activities = len(running_activities)
 
