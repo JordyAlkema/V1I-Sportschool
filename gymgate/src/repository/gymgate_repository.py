@@ -12,10 +12,10 @@ class GymgateRepository:
         cursor.execute("SELECT id FROM gebruikers WHERE pasnummer = %s", (card_uid,))
         return cursor.fetchone()
 
-    def get_running_activities_by_user_id(self, user_id):
+    def get_running_activity_by_user_id(self, user_id):
         cursor = self.connection.cursor(buffered=True)
         cursor.execute('SELECT * FROM activiteiten WHERE `user_id` = %s and `eind_datum` is NULL', (user_id,))
-        return cursor.fetchall()
+        return cursor.fetchone()
 
     def add_activity(self, user_id, automaat_id):
         cursor = self.connection.cursor(buffered=True)
@@ -24,12 +24,12 @@ class GymgateRepository:
                        (user_id, automaat_id,))
         self.connection.commit()
 
-    def update_activity(self, user_id, automaat_id):
+    def finish_activity(self, activity_id):
         cursor = self.connection.cursor(buffered=True)
         cursor.execute(
-            "UPDATE `activiteiten` SET `eind_datum` = NOW() WHERE user_id = %s AND automaat_id = %s ORDER BY `begin_datum` DESC LIMIT 1",
-            (user_id, automaat_id,))
+            "UPDATE `activiteiten` SET `eind_datum` = NOW() WHERE id = %s ORDER BY `begin_datum` DESC LIMIT 1",
+            (activity_id,))
         self.connection.commit()
 
     def close_database(self):
-        self.connection.close()
+        self.connection.close() 

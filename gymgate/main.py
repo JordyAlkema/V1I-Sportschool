@@ -10,6 +10,10 @@ from src.repository import gymgate_repository
 AUTOMAAT_ID = 1
 
 
+def format_card_uid(uid):
+    return str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
+
+
 class GymGate:
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
@@ -40,29 +44,27 @@ class GymGate:
             # If we have the UID, continue
             if status == self.MIFAREReader.MI_OK:
                 # Turn on the light
-                # @todo: make function of this to toggle
                 self.LED_red.turn_on()
 
-                card_uid = str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
-
+                card_uid = format_card_uid(uid)
                 user_id = self.gymgate_repository.get_user_id_by_card_uid(card_uid)
 
+                # Check if card is not connected to any accounts
                 if user_id is None:
                     continue
 
-                running_activities = self.gymgate_repository.get_running_activities_by_user_id(user_id)
-                amount_of_activities = len(running_activities)
+                running_activity = self.gymgate_repository.get_running_activity_by_user_id(user_id)
 
-                print("amount of activity: " + str(amount_of_activities))
-                print(user_id)
-
-                if amount_of_activities == 0:
+                # Check if has activity and is on the same machine.
+                if running_activity is not None and running_activity[2] == AUTOMAAT_ID:
+                    self.gymgate_repository.finish_activity(running_activity[0])
+                elif running_activity is None:
                     self.gymgate_repository.add_activity(user_id, AUTOMAAT_ID)
+
+                time.sleep(5)
 
             else:
                 self.LED_red.turn_off()
-
-            time.sleep(5)
 
     def close_program(self, signal, frame):
         print("Ctrl+C captured, ending read.")
