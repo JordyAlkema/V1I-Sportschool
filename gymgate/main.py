@@ -84,15 +84,16 @@ while continue_reading:
         data_query_for_running_activity_by_user_id = cursor_query_for_running_activity_by_user_id.fetchall()
 
         amount_of_activities = len(data_query_for_running_activity_by_user_id)
+
         print("amount of activity: " + str(amount_of_activities))
         print(user_id)
 
+        if (amount_of_activities > 0):
+            insert_activity = (
+                "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
+            )
+            cursor_insert_activity.execute(insert_activity, (user_id, AUTOMAAT_ID,))
 
-
-        # insert_activity = (
-        #     "INSERT INTO activiteiten(`user_id`, `automaat_id`, `begin_datum`) VALUES(%s, %s, NOW());"
-        # )
-        # cursor_insert_activity.execute(insert_activity, (AUTOMAAT_ID, ))
     else:
         LED_red.turn_off()
 
