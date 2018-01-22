@@ -22,7 +22,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Automaattype extends Eloquent
 {
 	protected $table = 'automaattype';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $fillable = [

@@ -27,7 +27,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Automaat extends Eloquent
 {
 	protected $table = 'automaten';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = false;
 
 	protected $casts = [

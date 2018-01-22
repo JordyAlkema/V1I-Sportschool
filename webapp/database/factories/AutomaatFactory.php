@@ -4,7 +4,6 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Models\Automaat::class, function (Faker $faker) {
     $name = $faker->word;
-    dd(factory(\App\Models\Locatie::class)->create());
     return [
         //
         'naam' => $name,
