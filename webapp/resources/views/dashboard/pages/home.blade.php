@@ -5,12 +5,32 @@
 @section('content')
     {{--<h2>Welkom, </h2>--}}
     <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">credit_card</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Uw tegoed</p>
+                    <h3 class="title">{{ $user->balance }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i> Laatste transactie {{$latestTransaction}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="purple">
-                    <h4 class="title">Activiteiten</h4>
-                    <p class="category">De laatste 3 activiteiten</p>
-                </div>
+                <a href="{{ route('dashboard.activity') }}">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Activiteiten</h4>
+                        <p class="category">Uw laatste 3 activiteiten</p>
+                    </div>
+                </a>
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
                         <thead class="text-warning">
@@ -33,10 +53,12 @@
         </div>
         <div class="col-lg-6 col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="orange">
-                    <h4 class="title">Transacties</h4>
-                    <p class="category">De afgelopen 3 transacties</p>
-                </div>
+                <a href="{{ route('dashboard.transactions') }}">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title">Transacties</h4>
+                        <p class="category">Uw afgelopen 3 transacties</p>
+                    </div>
+                </a>
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
                         <thead class="text-warning">

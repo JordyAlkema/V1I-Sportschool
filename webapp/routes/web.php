@@ -35,11 +35,22 @@ Route::get('/', function () {
 
         Route::get('/app/my-account', 'DashboardController@homeView')->name('dashboard.account');
 
-        Route::get('/app/activity', 'DashboardController@homeView')->name('dashboard.activity');
+        Route::get('/app/activity', 'DashboardController@activitiesView')->name('dashboard.activity');
+
+        Route::get('/app/transacties', 'DashboardController@transactionsView')->name('dashboard.transactions');
 
         Route::get('/app/my-card', 'DashboardController@gymCardView')->name('dashboard.card');
 
+        Route::get('/app/transactie/{id}', 'DashboardController@activityTransaction')->name('dashboard.transaction');
 
         Route::get('/app/locations', 'DashboardController@homeView')->name('dashboard.locations');
+
+        /**
+         * Actions
+         */
+
+        Route::get('/app/addBalance/{add}', 'BalanceController@addBalance')->name('action.addBalance');
+
+
 
     });
