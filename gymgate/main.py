@@ -9,7 +9,6 @@ from src.repository import gymgate_repository
 
 AUTOMAAT_ID = 1
 
-
 def format_card_uid(uid):
     return str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
@@ -20,6 +19,7 @@ class GymGate:
         self.is_running = True
         self.MIFAREReader = MFRC522.MFRC522()
         self.LED_red = LED(GPIO, 12)
+        self.AUTOMAAT_PRICE = self.gymgate_repository.get_price_per_minute_of_automaat(AUTOMAAT_ID)[0]
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -55,7 +55,11 @@ class GymGate:
 
                 # Check if has activity and is on the same machine.
                 if running_activity is not None and running_activity[2] == AUTOMAAT_ID:
+                    # Finish activity and add transaction
                     self.gymgate_repository.finish_activity(running_activity[0])
+                    total_price = self.gymgate_repository.get_price_of_activity(running_activity[0], self.AUTOMAAT_PRICE)
+                    self.gymgate_repository.add_transaction(user_id, total_price, running_activity[0])
+
                 elif running_activity is None:
                     self.gymgate_repository.add_activity(user_id, AUTOMAAT_ID)
 
