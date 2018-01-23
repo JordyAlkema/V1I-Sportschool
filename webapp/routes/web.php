@@ -33,7 +33,7 @@ Route::get('/', function () {
 
         Route::get('/app/', 'DashboardController@homeView')->name('dashboard');
 
-        Route::get('/app/my-account', 'DashboardController@homeView')->name('dashboard.account');
+        Route::get('/app/my-account', 'UserController@profileView')->name('dashboard.account');
 
         Route::get('/app/activity', 'DashboardController@activitiesView')->name('dashboard.activity');
 
@@ -45,13 +45,16 @@ Route::get('/', function () {
 
         Route::get('/app/coach', 'DashboardController@personalCoachView')->name('dashboard.personalCoach');
 
-        Route::get('/app/locations', 'DashboardController@homeView')->name('dashboard.locations');
+        Route::get('/app/locations', 'DashboardController@locationsView')->name('dashboard.locations');
 
         /**
          * Actions
          */
 
         Route::get('/app/addBalance/{add}', 'BalanceController@addBalance')->name('action.addBalance');
+        Route::post('/app/sendMessage', 'PersonalCoachController@sendMessage')->name('action.sendMessage');
+
+
 
 
 

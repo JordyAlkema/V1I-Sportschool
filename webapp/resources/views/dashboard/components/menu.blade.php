@@ -19,7 +19,7 @@
     </li>
     <li {{ (Route::currentRouteName() == 'dashboard.transactions' ? 'class=active' : '') }}>
         <a href="{{ route('dashboard.transactions') }}">
-            <i class="material-icons">directions_run</i>
+            <i class="material-icons">swap_horiz</i>
             <p>Transacties</p>
         </a>
     </li>
@@ -31,7 +31,7 @@
     </li>
     <li {{ (Route::currentRouteName() == 'dashboard.personalCoach' ? 'class=active' : '') }}>
         <a href="{{ route('dashboard.personalCoach') }}">
-            <i class="material-icons">credit_card</i>
+            <i class="material-icons">people_outline</i>
             <p>Personal coach</p>
         </a>
     </li>

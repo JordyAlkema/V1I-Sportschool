@@ -17,6 +17,7 @@ class CreateAfspraakTable extends Migration {
 			$table->increments('id', true);
 			$table->integer('medewerker_id')->unsigned()->index('afspraak_medewerker_idx');
 			$table->integer('user_id')->unsigned()->index('afspraak_user_idx');
+			$table->string('bericht', 1024);
 			$table->dateTime('email_verstuurd')->nullable();
 		});
 	}

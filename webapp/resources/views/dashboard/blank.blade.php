@@ -14,7 +14,7 @@
     <!--  Material Dashboard CSS    -->
     <link href="/assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="/assets/css/demo.css" rel="stylesheet" />
+    {{--<link href="/assets/css/demo.css" rel="stylesheet" />--}}
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
@@ -81,11 +81,13 @@
 <!--  Notifications Plugin    -->
 <script src="../assets/js/bootstrap-notify.js"></script>
 <!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqB_-GALibx7FGFWQmODw4Y7MhB_HTig&callback=initMap">
+</script>
 <!-- Material Dashboard javascript methods -->
 <script src="../assets/js/material-dashboard.js?v=1.2.0"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
+{{--<script src="../assets/js/demo.js"></script>--}}
 <script type="text/javascript">
     $(document).ready(function() {
 

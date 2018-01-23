@@ -71,4 +71,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.pages.contactPersonalCoach');
     }
+
+    public function locationsView()
+    {
+        return view('dashboard.pages.locations');
+    }
 }
