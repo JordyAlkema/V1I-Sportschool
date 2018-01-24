@@ -15,5 +15,5 @@ use Illuminate\Http\Request;
 
 Route::post('user', 'ApiController@user')->name('api.User');
 
-Route::get('checkIn', 'DashboardController@homeView')->name('api.CheckIn');
-Route::get('checkOut', 'DashboardController@homeView')->name('api.CheckOut');
+Route::post('checkIn', 'ApiController@checkIn')->name('api.CheckIn');
+Route::post('checkOut', 'ApiController@checkOut')->name('api.CheckOut');
