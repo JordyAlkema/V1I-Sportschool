@@ -34,8 +34,19 @@ class DashboardController extends Controller
 
     public function gymCardView()
     {
+        $gebruiker = Auth::user();
+
+        $latestTransaction = Transactie::where('user_id', $gebruiker['id'])->orderby('datum', 'DESC')->first();
+
+        if($latestTransaction){
+            $latestTransaction = $latestTransaction->datum->toDateString();
+        }else{
+            $latestTransaction = '';
+        }
+
         return view('dashboard.pages.gymcard')
-            ->with('user', Auth::user());
+            ->with('user', Auth::user())
+            ->with('latestTransaction', $latestTransaction);
     }
 
     public function activitiesView()

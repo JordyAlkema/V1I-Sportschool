@@ -36,6 +36,11 @@ class Gebruiker extends Eloquent implements Authenticatable
 		'geboortedatum'
 	];
 
+    protected $hidden = [
+        'wachtwoord',
+        'remember_token'
+    ];
+
 	protected $fillable = [
 		'voornaam',
 		'tussenvoegsel',

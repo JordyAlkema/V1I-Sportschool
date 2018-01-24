@@ -10,12 +10,12 @@
                     <i class="material-icons">credit_card</i>
                 </div>
                 <div class="card-content">
-                    <p class="category">Balance</p>
-                    <h3 class="title">{{$user->balance}}</h3>
+                    <p class="category">Uw tegoed</p>
+                    <h3 class="title">€{{ number_format($user->balance, 2) }}</h3>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">date_range</i> Laatste transactie 17 Januari 12:23
+                        <i class="material-icons">date_range</i> Laatste transactie {{$latestTransaction}}
                     </div>
                 </div>
             </div>
