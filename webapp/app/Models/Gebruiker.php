@@ -75,4 +75,17 @@ class Gebruiker extends Eloquent implements Authenticatable
 
         return $sum;
     }
+
+    public function getNameAttribute(){
+
+	    $name = $this->voornaam;
+
+	    if($this->tussenvoegsel){
+            $name .= ' ' . $this->tussenvoegsel;
+        }
+
+        $name .= ' ' . $this->achternaam;
+
+        return $name;
+    }
 }

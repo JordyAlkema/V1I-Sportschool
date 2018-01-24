@@ -65,6 +65,9 @@
             <footer class="footer">
                 @include('dashboard.components.footer')
             </footer>
+            @if (config('app.debug'))
+                @include('sudosu::user-selector')
+            @endif
         </div>
     </div>
 </body>

@@ -7,6 +7,7 @@ use App\Models\Gebruiker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -37,6 +38,10 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+
+        Session::forget('sudosu.original_id');
+        Session::forget('sudosu.has_sudoed');
+
         return redirect()->route('login')->with('error', 'U bent uitgelogd!');
     }
 }

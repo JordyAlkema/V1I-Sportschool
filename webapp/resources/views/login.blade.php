@@ -11,4 +11,9 @@
     <input type="password" name="password" placeholder="Wachtwoord"/>
 
     <input type="submit"/>
+
 </form>
+
+@if (config('app.debug'))
+    @include('sudosu::user-selector')
+@endif
