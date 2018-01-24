@@ -9,6 +9,7 @@ from src.repository import gymgate_repository
 
 AUTOMAAT_ID = 1
 
+
 def format_card_uid(uid):
     return str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
@@ -45,23 +46,24 @@ class GymGate:
                 self.LED_red.turn_on()
 
                 card_uid = format_card_uid(uid)
-                user_id = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
-
-                # Check if card is not connected to any accounts
-                if user_id is None:
-                    continue
-
-                running_activity = self.gymgate_repository.get_running_activity_by_user_id(user_id)
-
-                # Check if has activity and is on the same machine.
-                if running_activity is not None and running_activity[2] == AUTOMAAT_ID:
-                    # Finish activity and add transaction
-                    self.gymgate_repository.finish_activity(running_activity[0])
-                    total_price = self.gymgate_repository.get_price_of_activity(running_activity[0], self.AUTOMAAT_PRICE)
-                    self.gymgate_repository.add_transaction(user_id, total_price, running_activity[0])
-
-                elif running_activity is None:
-                    self.gymgate_repository.add_activity(user_id, AUTOMAAT_ID)
+                user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
+                print(user_data)
+                print(user_data.user.id)
+                # # Check if card is not connected to any accounts
+                # if user_id is None:
+                #     continue
+                #
+                # running_activity = self.gymgate_repository.get_running_activity_by_user_id(user_id)
+                #
+                # # Check if has activity and is on the same machine.
+                # if running_activity is not None and running_activity[2] == AUTOMAAT_ID:
+                #     # Finish activity and add transaction
+                #     self.gymgate_repository.finish_activity(running_activity[0])
+                #     total_price = self.gymgate_repository.get_price_of_activity(running_activity[0], self.AUTOMAAT_PRICE)
+                #     self.gymgate_repository.add_transaction(user_id, total_price, running_activity[0])
+                #
+                # elif running_activity is None:
+                #     self.gymgate_repository.add_activity(user_id, AUTOMAAT_ID)
 
                 time.sleep(5)
 
