@@ -20,7 +20,6 @@ class GymGate:
         self.is_running = True
         self.MIFAREReader = MFRC522.MFRC522()
         self.LED_red = LED(GPIO, 12)
-        self.AUTOMAAT_PRICE = self.gymgate_repository.get_price_per_minute_of_automaat(AUTOMAAT_ID)[0]
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -73,7 +72,6 @@ class GymGate:
     def close_program(self, signal, frame):
         print("Ctrl+C captured, ending read.")
         self.is_running = False
-        self.gymgate_repository.close_database()
         GPIO.cleanup()
 
 
