@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('user', 'ApiController@user')->name('api.User');
+
+Route::get('checkIn', 'DashboardController@homeView')->name('api.CheckIn');
+Route::get('checkOut', 'DashboardController@homeView')->name('api.CheckOut');
