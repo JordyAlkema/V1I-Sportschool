@@ -45,7 +45,7 @@ class GymGate:
                 self.LED_red.turn_on()
 
                 card_uid = format_card_uid(uid)
-                user_id = self.gymgate_repository.get_user_id_by_card_uid(card_uid)[0]
+                user_id = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
 
                 # Check if card is not connected to any accounts
                 if user_id is None:
