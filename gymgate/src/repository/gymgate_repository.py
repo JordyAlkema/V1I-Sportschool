@@ -11,6 +11,7 @@ class GymgateRepository:
 
     def get_user_status_by_card_uid(self, card_uid):
         req = requests.post(self.host + '/api/user', data={'cardnummer': card_uid})
+	print(self.host + '/api/user')
         return req.json()
 
     def do_check_in(self, user_id, automaat_id):
