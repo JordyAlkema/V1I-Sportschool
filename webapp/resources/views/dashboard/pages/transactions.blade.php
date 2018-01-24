@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header" data-background-color="orange">
             <h4 class="title">Transacties</h4>
-            <p class="category">Here is a subtitle for this table</p>
+            <p class="category">Al uw transacties in een overzicht</p>
         </div>
         <div class="card-content table-responsive">
             <table class="table">
@@ -27,7 +27,7 @@
                             <td class="text-danger">{{number_format($transactie->bedrag, 2)}}</td>
                         @endif
 
-                        <td>{{$transactie->datum}}</td>
+                        <td>{{$transactie->datum->toDateString()}}</td>
                     </tr>
                 @endforeach
                 </tbody>

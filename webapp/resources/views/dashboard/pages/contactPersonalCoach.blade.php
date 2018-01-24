@@ -6,7 +6,6 @@
     <div class="card">
     <div class="card-header" data-background-color="red">
         <h4 class="title">Neem contact op met een personal coach</h4>
-        <p class="category">Complete your profile</p>
     </div>
     <div class="card-content">
         <form method="post" action="{{ route('action.sendMessage') }}">
@@ -31,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary pull-right">Verstuur bericht</button>
+            <button type="submit" class="btn pull-right">Verstuur bericht</button>
             <div class="clearfix"></div>
         </form>
     </div>

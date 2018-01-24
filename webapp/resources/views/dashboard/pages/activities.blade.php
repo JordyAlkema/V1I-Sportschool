@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-header" data-background-color="purple">
         <h4 class="title">Activiteiten</h4>
-        <p class="category">Here is a subtitle for this table</p>
+        <p class="category">Al uw activiteiten in een overzicht</p>
     </div>
     <div class="card-content table-responsive">
         <table class="table">

@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-content">
                     <p class="category">Uw tegoed</p>
-                    <h3 class="title">{{ $user->balance }}</h3>
+                    <h3 class="title">€{{ number_format($user->balance, 2) }}</h3>
                 </div>
                 <div class="card-footer">
                     <div class="stats">
@@ -34,9 +34,9 @@
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
                         <thead class="text-warning">
-                        <th>Machine</th>
-                        <th>Begintijd</th>
-                        <th>Tijd op machine</th>
+                            <th>Machine</th>
+                            <th>Begintijd</th>
+                            <th>Tijd op machine</th>
                         </thead>
                         <tbody>
                         @foreach($activiteiten as $activiteit)
@@ -77,7 +77,7 @@
                                     <td class="text-danger">{{number_format($transactie->bedrag, 2)}}</td>
                                 @endif
 
-                                <td>{{$transactie->datum}}</td>
+                                <td>{{$transactie->datum->toDateString()}}</td>
                             </tr>
                         @endforeach
                         </tbody>
