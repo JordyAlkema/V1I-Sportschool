@@ -7,6 +7,7 @@ $factory->define(\App\Models\Automaat::class, function (Faker $faker) {
     return [
         //
         'naam' => $name,
+        'api_key' => str_random(55),
         'bedrag_per_minuut' => $faker->randomFloat(2, 0, 1),
         'bedrag_per_minuut' => $faker->randomFloat(2, 0, 1),
         'automaat_type_id' => function() use ($name){

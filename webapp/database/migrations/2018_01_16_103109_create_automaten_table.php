@@ -16,6 +16,7 @@ class CreateAutomatenTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('naam', 45);
+			$table->string('api_key', 55);
 			$table->float('bedrag_per_minuut', 10, 0);
 			$table->integer('locatie_id')->unsigned()->nullable()->index('locatie_idx');
 			$table->integer('automaat_type_id')->unsigned()->index('AutomaatType_idx');
