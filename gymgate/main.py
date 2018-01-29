@@ -21,7 +21,7 @@ class GymGate:
         self.is_running = True
         self.MIFAREReader = MFRC522()
 
-        self.LED_green = LED(GPIO, 20)
+        self.LED_green = LED(GPIO, 21)
         self.LED_red = LED(GPIO, 12)
 
         signal.signal(signal.SIGINT, self.close_program)
