@@ -915,13 +915,6 @@ h2.title {
     background: rgba(200, 200, 200, 0.2);
 }
 
-.perfect-scrollbar-on .sidebar .sidebar-wrapper,
-.sidebar .sidebar-wrapper,
-.perfect-scrollbar-on .main-panel,
-.main-panel {
-    overflow: hidden;
-}
-
 .perfect-scrollbar-off .sidebar .sidebar-wrapper,
 .perfect-scrollbar-off .main-panel {
     overflow: auto;

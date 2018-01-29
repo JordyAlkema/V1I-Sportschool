@@ -5,8 +5,8 @@
             <p>Dashboard</p>
         </a>
     </li>
-    <li {{ (Route::currentRouteName() == 'dashboard.account' ? 'class=active' : '') }}>
-        <a href="{{ route('dashboard.account') }}">
+    <li {{ (Route::currentRouteName() == 'medewerker.dashboard.account' ? 'class=active' : '') }}>
+        <a href="{{ route('medewerker.dashboard.account') }}">
             <i class="material-icons">person</i>
             <p>Mijn account</p>
         </a>

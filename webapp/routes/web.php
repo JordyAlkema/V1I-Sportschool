@@ -59,7 +59,11 @@ Route::get('/', function () {
     Route::group(['middleware' => ['AuthMedewerker'], 'prefix' => '/app/medewerker/'], function () {
 
         Route::get('/', 'DashboardController@homeViewMedewerker')->name('medewerker.dashboard');
+
+        Route::get('/my-account', 'UserController@profileViewMedewerker')->name('medewerker.dashboard.account');
+
         Route::get('/gebruikers', 'DashboardController@gebruikersViewMedewerker')->name('medewerker.gebruikers');
         Route::get('/gebruiker/{id}', 'DashboardController@gebruikerViewMedewerker')->name('medewerker.gebruiker');
 
+        Route::post('/saveProfile/{id}', 'UserController@profileUpdateMedewerker')->name('medewerker.action.saveUser');
     });

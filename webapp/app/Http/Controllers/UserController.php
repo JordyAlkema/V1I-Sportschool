@@ -30,4 +30,25 @@ class UserController extends Controller
 
         return redirect()->route('dashboard')->with('success','Profiel is opgeslagen!');
     }
+
+    public function profileUpdateMedewerker(UserUpdateRequest $request, $id)
+    {
+        $gebruiker = Gebruiker::find($id);
+
+        $gebruiker['voornaam'] = $request['voornaam'];
+        $gebruiker['tussenvoegsel'] = $request['tussenvoegsel'];
+        $gebruiker['achternaam'] = $request['achternaam'];
+        $gebruiker['email'] = $request['email'];
+        $gebruiker['geboortedatum'] = $request['geboortedatum'];
+
+        $gebruiker->save();
+
+        return redirect()->route('medewerker.dashboard')->with('success','Profiel is opgeslagen!');
+    }
+
+    public function profileViewMedewerker()
+    {
+        $gebruiker = Auth::user();
+        return view('dashboard.pages.medewerker.self')->with('gebruiker', $gebruiker);
+    }
 }
