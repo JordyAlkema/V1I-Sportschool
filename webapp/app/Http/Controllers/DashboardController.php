@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activiteiten;
+use App\Models\Gebruiker;
 use App\Models\Transactie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,6 +31,20 @@ class DashboardController extends Controller
             ->with('transacties', $transacties)
             ->with('activiteiten', $activiteiten)
             ->with('latestTransaction', $latestTransaction);
+    }
+
+    public function homeViewMedewerker()
+    {
+        return view('dashboard.pages.medewerker.home');
+    }
+
+    public function gebruikersViewMedewerker()
+    {
+        $gebruikers = Gebruiker::where('rol_id', 1)
+                        ->get();
+
+        return view('dashboard.pages.medewerker.users')
+            ->with('gebruikers', $gebruikers);
     }
 
     public function gymCardView()
@@ -80,11 +95,23 @@ class DashboardController extends Controller
 
     public function personalCoachView()
     {
-        return view('dashboard.pages.contactPersonalCoach');
+        $medewerkers = Gebruiker::where('rol_id', 2)
+                                ->get();
+
+        return view('dashboard.pages.contactPersonalCoach')
+            ->with('medewerkers', $medewerkers);
     }
 
     public function locationsView()
     {
         return view('dashboard.pages.locations');
+    }
+
+    public function gebruikerViewMedewerker($id)
+    {
+        $gebruiker = Gebruiker::find($id);
+
+        return view('dashboard.pages.medewerker.user')->with('gebruiker', $gebruiker);
+
     }
 }

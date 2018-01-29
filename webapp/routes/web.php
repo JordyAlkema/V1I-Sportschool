@@ -29,33 +29,37 @@ Route::get('/', function () {
     /**
      * Dashboard
      */
-    Route::group(['middleware' => ['AuthGebruiker']], function () {
+    Route::group(['middleware' => ['AuthGebruiker'], 'prefix' => '/app/'], function () {
 
-        Route::get('/app/', 'DashboardController@homeView')->name('dashboard');
+        Route::get('/', 'DashboardController@homeView')->name('dashboard');
 
-        Route::get('/app/my-account', 'UserController@profileView')->name('dashboard.account');
+        Route::get('/my-account', 'UserController@profileView')->name('dashboard.account');
 
-        Route::get('/app/activity', 'DashboardController@activitiesView')->name('dashboard.activity');
+        Route::get('/activity', 'DashboardController@activitiesView')->name('dashboard.activity');
 
-        Route::get('/app/transacties', 'DashboardController@transactionsView')->name('dashboard.transactions');
+        Route::get('/transacties', 'DashboardController@transactionsView')->name('dashboard.transactions');
 
-        Route::get('/app/my-card', 'DashboardController@gymCardView')->name('dashboard.card');
+        Route::get('/my-card', 'DashboardController@gymCardView')->name('dashboard.card');
 
-        Route::get('/app/transactie/{id}', 'DashboardController@activityTransaction')->name('dashboard.transaction');
+        Route::get('/transactie/{id}', 'DashboardController@activityTransaction')->name('dashboard.transaction');
 
-        Route::get('/app/coach', 'DashboardController@personalCoachView')->name('dashboard.personalCoach');
+        Route::get('/coach', 'DashboardController@personalCoachView')->name('dashboard.personalCoach');
 
-        Route::get('/app/locations', 'DashboardController@locationsView')->name('dashboard.locations');
+        Route::get('/locations', 'DashboardController@locationsView')->name('dashboard.locations');
 
         /**
          * Actions
          */
 
-        Route::get('/app/addBalance/{add}', 'BalanceController@addBalance')->name('action.addBalance');
-        Route::post('/app/sendMessage', 'PersonalCoachController@sendMessage')->name('action.sendMessage');
+        Route::get('/addBalance/{add}', 'BalanceController@addBalance')->name('action.addBalance');
+        Route::post('/sendMessage', 'PersonalCoachController@sendMessage')->name('action.sendMessage');
+        Route::post('/saveProfile', 'UserController@profileUpdate')->name('action.saveUser');
+    });
 
+    Route::group(['middleware' => ['AuthMedewerker'], 'prefix' => '/app/medewerker/'], function () {
 
-
-
+        Route::get('/', 'DashboardController@homeViewMedewerker')->name('medewerker.dashboard');
+        Route::get('/gebruikers', 'DashboardController@gebruikersViewMedewerker')->name('medewerker.gebruikers');
+        Route::get('/gebruiker/{id}', 'DashboardController@gebruikerViewMedewerker')->name('medewerker.gebruiker');
 
     });

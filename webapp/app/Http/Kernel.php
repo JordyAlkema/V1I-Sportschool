@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AuthGebruiker;
+use App\Http\Middleware\AuthMedewerker;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -59,5 +60,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'AuthGebruiker' => AuthGebruiker::class,
+        'AuthMedewerker' => AuthMedewerker::class,
     ];
 }

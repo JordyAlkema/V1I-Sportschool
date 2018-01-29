@@ -14,7 +14,7 @@ class AddForeignKeysToAfspraakTable extends Migration {
 	{
 		Schema::table('afspraak', function(Blueprint $table)
 		{
-			$table->foreign('medewerker_id', 'afspraak_medewerker')->references('id')->on('medewerker')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('medewerker_id', 'afspraak_medewerker')->references('id')->on('gebruikers')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('user_id', 'afspraak_user')->references('id')->on('gebruikers')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}

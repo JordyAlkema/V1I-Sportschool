@@ -18,6 +18,11 @@ class CreateGebruikersTable extends Migration {
 			$table->string('voornaam', 45);
 			$table->string('tussenvoegsel', 45)->nullable();
 			$table->string('achternaam', 45);
+            $table->integer('rol_id')->unsigned()->index('rol_idx');
+
+            //Alleen voor medewerkers
+            $table->integer('locatie_id')->unsigned()->nullable()->index('locatie_idx');
+
 			$table->string('email', 80)->unique();
 			$table->string('wachtwoord', 80);
 			$table->date('geboortedatum');

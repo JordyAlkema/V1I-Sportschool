@@ -44,7 +44,7 @@ class Afspraak extends Eloquent
 
 	public function medewerker()
 	{
-		return $this->belongsTo(Medewerker::class);
+		return $this->belongsTo(Gebruiker::class, 'medewerker_id');
 	}
 
 	public function gebruiker()

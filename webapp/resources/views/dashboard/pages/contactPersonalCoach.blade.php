@@ -15,12 +15,8 @@
                     <div class="form-group">
                         <label>Personal coach:</label>
                         <select name="medewerker">
-                            @foreach(\App\Models\Medewerker::all() as $medewerker)
-                                @if($medewerker->tussenvoegsel == null)
-                                    <option value="{{$medewerker->id}}">{{$medewerker->naam}} {{$medewerker->achternaam}} - {{$medewerker->locatie->naam}}</option>
-                                @else
-                                    <option value="{{$medewerker->id}}">{{$medewerker->naam}} {{$medewerker->tussenvoegsel}} {{$medewerker->achternaam}} - {{$medewerker->locatie->naam}}</option>
-                                @endif
+                            @foreach($medewerkers as $medewerker)
+                                    <option value="{{$medewerker->id}}">{{$medewerker->name}} - {{$medewerker->locatie->naam}}</option>
                             @endforeach
                         </select>
                         <div class="form-group label-floating is-empty">

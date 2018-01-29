@@ -19,6 +19,16 @@ class DatabaseSeeder extends Seeder
             'naam' => 'Bijschrijving',
         ]);
 
+        factory(\App\Models\Rol::class)->create([
+            'naam' => 'Gebruiker',
+            'beheerder' => false,
+        ]);
+
+        factory(\App\Models\Rol::class)->create([
+            'naam' => 'Medewerker',
+            'beheerder' => true,
+        ]);
+
         $this->call([
             GebruikerSeeder::class
         ]);

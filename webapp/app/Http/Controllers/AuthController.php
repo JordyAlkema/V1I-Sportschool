@@ -14,7 +14,7 @@ class AuthController extends Controller
     //
     public function loginView()
     {
-        if(Auth::check()){
+        if(Auth::check() && !session('error')){
             return redirect()->route('dashboard');
         }
 

@@ -27,7 +27,11 @@
                 <img height="125px" src="/assets/img/Logo.png"/>
             </div>
             <div class="sidebar-wrapper">
-                @include('dashboard.components.menu')
+                @if(isset($menu) && $menu == 'medewerker')
+                    @include('dashboard.components.menuMedewerker')
+                @else
+                    @include('dashboard.components.menu')
+                @endif
             </div>
         </div>
         <div class="main-panel">

@@ -74,10 +74,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Gebruiker::class,
         ],
-        'medewerker' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Medewerker::class,
-        ],
 
         // 'users' => [
         //     'driver' => 'database',

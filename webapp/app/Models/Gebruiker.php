@@ -54,14 +54,24 @@ class Gebruiker extends Eloquent implements Authenticatable
 		return $this->hasMany(Activiteiten::class, 'user_id');
 	}
 
-	public function afspraaken()
+	public function afspraken()
 	{
 		return $this->hasMany(Afspraak::class, 'user_id');
 	}
 
+    public function locatie()
+    {
+        return $this->belongsTo(Locatie::class, 'locatie_id');
+    }
+
 	public function transacties()
 	{
 		return $this->hasMany(Transactie::class, 'user_id');
+	}
+
+	public function rol()
+	{
+		return $this->belongsTo(Rol::class, 'rol_id');
 	}
 
 	public function getBalanceAttribute(){

@@ -41,6 +41,6 @@ class Locatie extends Eloquent
 
 	public function medewerkers()
 	{
-		return $this->hasMany(Medewerker::class, 'locatie_id');
+		return $this->hasMany(Gebruiker::class, 'locatie_id');
 	}
 }
