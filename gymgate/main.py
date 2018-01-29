@@ -21,8 +21,8 @@ class GymGate:
         self.is_running = True
         self.MIFAREReader = MFRC522()
         self.display = Display()
-        self.LED_green = LED(GPIO, 21)
-        self.LED_red = LED(GPIO, 12)
+        self.LED_green = LED(GPIO, 9)
+        self.LED_red = LED(GPIO, 18)
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -74,6 +74,6 @@ class GymGate:
         GPIO.cleanup()
 
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 GymGate()
