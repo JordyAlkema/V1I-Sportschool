@@ -6,9 +6,8 @@ import RPi.GPIO as GPIO
 
 from src.MFRC522 import MFRC522
 from src.LED import LED
+from src.config import AUTOMAAT
 from src.repository import gymgate_repository
-
-AUTOMAAT_ID = 1
 
 
 def format_card_uid(uid):
@@ -57,9 +56,9 @@ class GymGate:
                 user_id = user_data['user']['id']
 
                 if user_data['activeActiviteit'] is not None:
-                    self.gymgate_repository.do_check_out(user_id, AUTOMAAT_ID)
+                    self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
                 else:
-                    self.gymgate_repository.do_check_in(user_id, AUTOMAAT_ID)
+                    self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
 
                 time.sleep(5)
 
