@@ -14,9 +14,9 @@ class GymgateRepository:
         return req.json()
 
     def do_check_in(self, user_id, automaat_id):
-        req = requests.post(self.host + '/api/check_in', data={'user_id': user_id, 'automaat_id': automaat_id})
+        req = requests.post(self.host + '/api/checkIn', data={'user_id': user_id, 'automaat_id': automaat_id})
         return req.json()
 
     def do_check_out(self, user_id, automaat_id):
-        req = requests.post(self.host + '/api/check_out', data={'user_id': user_id, 'automaat_id': automaat_id})
+        req = requests.post(self.host + '/api/checkOut', data={'user_id': user_id, 'automaat_id': automaat_id})
         return req.json()

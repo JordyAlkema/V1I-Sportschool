@@ -1,9 +1,10 @@
 # -*- coding: utf8 -*-
-import RPi.GPIO as GPIO
+import signal
 import time
 
-import MFRC522
-import signal
+import RPi.GPIO as GPIO
+
+from src.MFRC522 import MFRC522
 from src.LED import LED
 from src.repository import gymgate_repository
 
@@ -19,6 +20,8 @@ class GymGate:
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
         self.MIFAREReader = MFRC522.MFRC522()
+
+        self.LED_green = LED(GPIO, 20)
         self.LED_red = LED(GPIO, 12)
 
         signal.signal(signal.SIGINT, self.close_program)
@@ -43,9 +46,10 @@ class GymGate:
             if status == self.MIFAREReader.MI_OK:
                 # Turn on the light
                 self.LED_red.turn_on()
+                self.LED_green.turn_on()
 
                 card_uid = format_card_uid(uid)
-                # @TODO: check on 404
+
                 user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
                 if user_data.status_code == 404:
                     continue
