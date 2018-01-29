@@ -1,13 +1,14 @@
 # -*- coding: utf8 -*-
-import RPi.GPIO as GPIO
+import signal
 import time
 
-import MFRC522
-import signal
-from src.LED import LED
-from src.repository import gymgate_repository
+import RPi.GPIO as GPIO
 
-AUTOMAAT_ID = 1
+from src.MFRC522 import MFRC522
+from src.LED import LED
+from src.config import AUTOMAAT
+from src.display import Display
+from src.repository import gymgate_repository
 
 
 def format_card_uid(uid):
@@ -18,9 +19,10 @@ class GymGate:
     def __init__(self):
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
-        self.MIFAREReader = MFRC522.MFRC522()
-        self.LED_red = LED(GPIO, 12)
-        self.AUTOMAAT_PRICE = self.gymgate_repository.get_price_per_minute_of_automaat(AUTOMAAT_ID)[0]
+        self.MIFAREReader = MFRC522()
+        self.display = Display()
+        self.LED_green = LED(GPIO, 9)
+        self.LED_red = LED(GPIO, 18)
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -44,26 +46,22 @@ class GymGate:
             if status == self.MIFAREReader.MI_OK:
                 # Turn on the light
                 self.LED_red.turn_on()
+                self.LED_green.turn_on()
+                self.display.show_message("Kaart gevonden")
 
                 card_uid = format_card_uid(uid)
+
                 user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
-                print(user_data)
-                print(user_data.user.id)
-                # # Check if card is not connected to any accounts
-                # if user_id is None:
-                #     continue
-                #
-                # running_activity = self.gymgate_repository.get_running_activity_by_user_id(user_id)
-                #
-                # # Check if has activity and is on the same machine.
-                # if running_activity is not None and running_activity[2] == AUTOMAAT_ID:
-                #     # Finish activity and add transaction
-                #     self.gymgate_repository.finish_activity(running_activity[0])
-                #     total_price = self.gymgate_repository.get_price_of_activity(running_activity[0], self.AUTOMAAT_PRICE)
-                #     self.gymgate_repository.add_transaction(user_id, total_price, running_activity[0])
-                #
-                # elif running_activity is None:
-                #     self.gymgate_repository.add_activity(user_id, AUTOMAAT_ID)
+                if user_data.status_code == 404:
+                    continue
+
+                user_id = user_data['user']['id']
+                self.display.show_message("welkom: " + user_data['user']['voornaam'])
+
+                if user_data['activeActiviteit'] is not None:
+                    self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
+                else:
+                    self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
 
                 time.sleep(5)
 
@@ -73,10 +71,9 @@ class GymGate:
     def close_program(self, signal, frame):
         print("Ctrl+C captured, ending read.")
         self.is_running = False
-        self.gymgate_repository.close_database()
         GPIO.cleanup()
 
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 GymGate()
