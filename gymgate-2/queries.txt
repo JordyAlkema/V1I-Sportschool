@@ -1,0 +1,8 @@
+Begin activiteit
+INSERT INTO `activiteiten` (`user_id`, `automaat_id`, `begin_datum`) VALUES (?, ?, NOW());
+
+Eind activiteit
+UPDATE `activiteiten` SET `eind_datum` = NOW() WHERE user_id=? ORDER BY `begin_datum` DESC LIMIT 1
+
+Opslaan transactie
+INSERT INTO `transactie` (`user_id`, `transactieType_id`, `bedrag`, `datum`, `activiteit_id`) VALUES (?, ?, ?, NOW(), ?)
