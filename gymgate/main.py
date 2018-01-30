@@ -12,6 +12,7 @@ from src.display import Display
 from src.repository import gymgate_repository
 from pirc522 import RFID
 
+
 def format_card_uid(uid):
     return str(uid[0]) + "." + str(uid[1]) + "." + str(uid[2]) + "." + str(uid[3])
 
@@ -20,7 +21,9 @@ class GymGate:
     def __init__(self):
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
-        self.RFID = RFID(pin_mode=GPIO.BCM, bus=0, device=1)
+        # self.RFID = RFID(pin_mode=GPIO.BCM, bus=0, device=1)
+
+        self.RFID = RFID(pin_mode=GPIO.BCM, bus=0, device=1, pin_rst=25, pin_irq=24, pin_ce=7)
         self.display = Display()
         self.LED_green = LED(GPIO, 9)
         self.LED_red = LED(GPIO, 18)
@@ -71,6 +74,7 @@ class GymGate:
         self.RFID.cleanup()
         GPIO.cleanup()
         sys.exit()
+
 
 GPIO.setmode(GPIO.BCM)
 
