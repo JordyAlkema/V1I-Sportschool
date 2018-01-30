@@ -21,6 +21,28 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">credit_card</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Abonnement</p>
+                    <h3 class="title">
+                    @if($user->abonnement)
+                        {{$user->abonnement->abbonement->naam}}
+                    @else
+                        Flexibel
+                    @endif
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i> Geldig tot {{$user->AbonnementTill}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-12">

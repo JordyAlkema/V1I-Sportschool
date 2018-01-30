@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return \Illuminate\Support\Facades\Auth::user();
+    return \Illuminate\Support\Facades\Auth::user()->abonnement;
 });
 
     /**
@@ -52,6 +52,7 @@ Route::get('/', function () {
          */
 
         Route::get('/addBalance/{add}', 'BalanceController@addBalance')->name('action.addBalance');
+        Route::get('/BuyAbonnement/{id}', 'BalanceController@BuyAbonnement')->name('action.BuyAbonnement');
         Route::post('/sendMessage', 'PersonalCoachController@sendMessage')->name('action.sendMessage');
         Route::post('/saveProfile', 'UserController@profileUpdate')->name('action.saveUser');
     });
