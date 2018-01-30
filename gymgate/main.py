@@ -74,8 +74,15 @@ class GymGate:
 
                     time.sleep(5)
 
-#            else:
-#                self.LED_red.turn_off()
+                else:
+                    self.show_error()
+            else:
+                self.show_error()
+
+    def show_error(self):
+        self.LED_green.turn_off()
+        self.LED_red.turn_on()
+        self.display.show_message("Fout met pas")
 
     def close_program(self, signal, frame):
         print("Ctrl+C captured, ending read.")
