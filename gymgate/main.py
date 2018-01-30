@@ -4,7 +4,7 @@ import time
 
 import RPi.GPIO as GPIO
 
-from src.MFRC522 import MFRC522
+import src.MFRC522 as MFRC522
 from src.LED import LED
 from src.config import AUTOMAAT
 from src.display import Display
@@ -19,7 +19,7 @@ class GymGate:
     def __init__(self):
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
-        self.MIFAREReader = MFRC522()
+        self.MIFAREReader = MFRC522.MFRC522()
         # self.display = Display()
         self.LED_green = LED(GPIO, 9)
         self.LED_red = LED(GPIO, 18)
