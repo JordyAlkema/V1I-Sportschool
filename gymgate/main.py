@@ -50,16 +50,16 @@ class GymGate:
                     print(card_uid)
 
                     user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
-                    if user_data.status_code == 404:
-                        continue
+#                    if user_data.status_code == 404:
+#                        continue
 
                     user_id = user_data['user']['id']
                     self.display.show_message(u"welkom: " + user_data['user']['voornaam'])
 
                     if user_data['activeActiviteit'] is not None:
-                        self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
+                        self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0]["id"], AUTOMAAT[0]["api_key"])
                     else:
-                        self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
+                        self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0]["id"], AUTOMAAT[0]["api_key"])
 
                     time.sleep(5)
 
