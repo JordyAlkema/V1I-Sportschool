@@ -44,16 +44,17 @@ class GymGate:
                     # Turn on the light
 #                    self.LED_red.turn_on()
 #                    self.LED_green.turn_on()
-                    self.display.show_message(u"Kaart gevonden")
-
+                    self.display.show_message(u"\rKaart gevonden")
+                    time.sleep(1)
+                    self.display.show_message(u"\rKaart gevonden")
                     card_uid = format_card_uid(uid)
                     print(card_uid)
 
                     user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
 #                    if user_data.status_code == 404:
 #                        continue
-
                     user_id = user_data['user']['id']
+
                     self.display.show_message(u"\rHallo " + user_data['user']['voornaam'])
                     time.sleep(2)
 
