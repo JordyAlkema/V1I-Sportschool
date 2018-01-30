@@ -36,6 +36,7 @@ class GymGate:
         while self.is_running:
             self.LED_green.turn_off()
             self.LED_red.turn_off()
+            self.display.show_message(u"\rWelkom!")
 
             self.RFID.wait_for_tag()
             (error, tag_type) = self.RFID.request()
@@ -48,7 +49,6 @@ class GymGate:
 
                     # Turn on the light
                     self.display.show_message(u"\rKaart gevonden")
-                    time.sleep(1)
 
                     card_uid = format_card_uid(uid)
                     print(card_uid)
@@ -60,6 +60,7 @@ class GymGate:
                         continue
 
                     self.LED_green.turn_on()
+
                     self.display.show_message(u"\rHallo " + user_data['user']['voornaam'])
 
                     time.sleep(2)
