@@ -20,6 +20,14 @@ class DashboardController extends Controller
         $activiteiten = Activiteiten::where('user_id', $gebruiker['id'])->orderby('begin_datum', 'DESC')->limit(3)->get();
         $latestTransaction = Transactie::where('user_id', $gebruiker['id'])->orderby('datum', 'DESC')->first();
 
+        $motivation = [
+            'Goed bezig ga zo door!',
+            'Kom je morgen weer?',
+            'Je hebt vandaag '. $gebruiker->kcalToday .' kcal verbrand.'
+        ];
+
+        $motivation = $motivation[array_rand($motivation)];
+
         if($latestTransaction){
             $latestTransaction = $latestTransaction->datum->toDateString();
         }else{
@@ -30,6 +38,7 @@ class DashboardController extends Controller
             ->with('user', $gebruiker)
             ->with('transacties', $transacties)
             ->with('activiteiten', $activiteiten)
+            ->with('motivation', $motivation)
             ->with('latestTransaction', $latestTransaction);
     }
 

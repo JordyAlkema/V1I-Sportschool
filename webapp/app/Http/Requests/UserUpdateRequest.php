@@ -25,11 +25,11 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             //
-            'voornaam'  => 'required',
+            'voornaam'  => '',
             'tussenvoegsel'  => '',
-            'achternaam'  => 'required',
+            'achternaam'  => '',
             'email'  => 'required|email',
-            'geboortedatum' => 'required|date',
+            'geboortedatum' => 'date',
         ];
     }
 }

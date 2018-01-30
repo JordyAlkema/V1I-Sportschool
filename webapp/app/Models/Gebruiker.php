@@ -145,4 +145,27 @@ class Gebruiker extends Eloquent implements Authenticatable
 
         return $name;
     }
+
+    public function getKcalMonthAttribute(){
+        return $this->kcal(Carbon::now()->subMonth(), Carbon::now());
+    }
+
+    public function getKcalTodayAttribute(){
+        return $this->kcal(Carbon::today(), Carbon::today());
+    }
+
+    public function kcal($start_datum, $eind_datum){
+        $activiteiten = Activiteiten::where('begin_datum', '>=', $start_datum->toDateString())
+                                    ->where('eind_datum', '<=', $eind_datum->toDateString())
+                                    ->where('user_id', $this->id)
+                                    ->get();
+
+        $totalKcal = 0;
+        foreach ($activiteiten as $activiteit){
+            //$totalKcal = $totalKcal + $activiteit->automaat['kcal_per_minuut'];
+            $totalKcal = $totalKcal + $activiteit->automaat['kcal_per_minuut'] * $activiteit->tijd;
+        }
+
+        return $totalKcal;
+    }
 }

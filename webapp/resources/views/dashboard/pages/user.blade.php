@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group label-floating is-empty">
                             <label class="label">geboortedatum</label>
-                            <input type="date" class="form-control" name='geboortedatum' value="{{$gebruiker['geboortedatum']->toDateString()}}">
+                            <input type="date" class="form-control" name='geboortedatum' value="@if($gebruiker['geboortedatum']) {{$gebruiker['geboortedatum']->toDateString()}} @endif">
                             <span class="material-input"></span></div>
                     </div>
                 </div>

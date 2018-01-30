@@ -21,6 +21,9 @@ Route::get('/', function () {
     Route::get('/login', 'AuthController@loginView')->name('loginView');
     Route::post('/login', 'AuthController@login')->name('login');
 
+    Route::get('/register', 'AuthController@registerView')->name('registerView');
+    Route::post('/register', 'AuthController@register')->name('register');
+
     /**
      * logout
      */

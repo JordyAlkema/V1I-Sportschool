@@ -15,9 +15,9 @@ class CreateGebruikersTable extends Migration {
 		Schema::create('gebruikers', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('voornaam', 45);
+			$table->string('voornaam', 45)->nullable();
 			$table->string('tussenvoegsel', 45)->nullable();
-			$table->string('achternaam', 45);
+			$table->string('achternaam', 45)->nullable();
             $table->integer('rol_id')->unsigned()->index('rol_idx');
 
             //Alleen voor medewerkers
@@ -25,7 +25,7 @@ class CreateGebruikersTable extends Migration {
 
 			$table->string('email', 80)->unique();
 			$table->string('wachtwoord', 80);
-			$table->date('geboortedatum');
+			$table->date('geboortedatum')->nullable();
 			$table->string('pasnummer', 45)->nullable();
 			$table->string('remember_token', 100)->nullable();
 		});

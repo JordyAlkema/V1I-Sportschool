@@ -15,11 +15,6 @@
                     <p class="category">Totaal aantal leden</p>
                     <h3 class="title">{{\App\Models\Gebruiker::get()->count()}}</h3>
                 </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">date_range</i>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -31,11 +26,6 @@
                 <div class="card-content">
                     <p class="category">Totaal aantal transacties</p>
                     <h3 class="title">{{\App\Models\Transactie::get()->count()}}</h3>
-                </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">date_range</i>
-                    </div>
                 </div>
             </div>
         </div>
@@ -49,11 +39,6 @@
                     <p class="category">Totaal aantal activiteiten</p>
                     <h3 class="title">{{\App\Models\Activiteiten::get()->count()}}</h3>
                 </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">date_range</i>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -63,13 +48,8 @@
                     <i class="material-icons">credit_card</i>
                 </div>
                 <div class="card-content">
-                    <p class="category">Aantal benno's locaties</p>
+                    <p class="category">Aantal locaties</p>
                     <h3 class="title">{{\App\Models\Locatie::get()->count()}}</h3>
-                </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">date_range</i>
-                    </div>
                 </div>
             </div>
         </div>

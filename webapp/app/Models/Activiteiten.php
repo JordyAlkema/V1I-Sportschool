@@ -67,7 +67,7 @@ class Activiteiten extends Eloquent
         if($this->eind_datum == null){
             $tijd = "Bezig met activiteit";
         }else{
-            $tijd = $this->begin_datum->diffInMinutes($this->eind_datum) . " Minuten";
+            $tijd = $this->begin_datum->diffInMinutes($this->eind_datum);
         }
 
         return $tijd;

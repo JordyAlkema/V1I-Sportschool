@@ -48,4 +48,23 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('error', 'U bent uitgelogd!');
     }
+
+    public function registerView()
+    {
+        return view('register');
+    }
+
+    public function register(Request $request)
+    {
+        $gebruiker = new Gebruiker();
+        $gebruiker->email = $request['email'];
+        $gebruiker->wachtwoord = Hash::make($request['password']);
+        $gebruiker->rol_id = 1;
+        $gebruiker->pasnummer = rand(10000000000, 99999999999);
+        $gebruiker->save();
+
+        Auth::login($gebruiker);
+
+        return redirect()->route('dashboard')->with('success', "Welkom bij sportschool Benno's!");
+    }
 }

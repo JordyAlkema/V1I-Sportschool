@@ -18,7 +18,7 @@ $factory->define(\App\Models\Transactie::class, function (Faker $faker) {
         'user_id' => $user->id,
         'transactieType_id' => $transactieType_id,
         'bedrag' => $bedrag,
-        'datum' => \Carbon\Carbon::now(),
+        'datum' => $faker->dateTimeBetween('-10 months'),
         'activiteit_id' => function() use ($user){
             return factory(\App\Models\Activiteiten::class)->create([
                 'user_id' => $user->id

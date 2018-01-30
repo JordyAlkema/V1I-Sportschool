@@ -3,7 +3,6 @@
 @section('page_title', 'Dashboard')
 
 @section('content')
-    {{--<h2>Welkom, </h2>--}}
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -48,6 +47,35 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">credit_card</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">verbrand</p>
+                    <h4 class="title">
+                        {{$user->KcalMonth}} Kcal
+                    </h4>
+
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i> Afgelopen maand
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="card-header text-center" data-background-color="blue">
+                    <h4 class="title">{{$motivation}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-12">

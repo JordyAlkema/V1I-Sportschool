@@ -17,7 +17,7 @@ $factory->define(\App\Models\Gebruiker::class, function (Faker $faker) {
     $rol = $faker->randomElement([1,2]);
 
     if($rol == 2){
-        $locatie =  factory(\App\Models\Locatie::class)->create()['id'];
+        $locatie =  $faker->numberBetween(1, 5);
     }else{
         $locatie = null;
     }
