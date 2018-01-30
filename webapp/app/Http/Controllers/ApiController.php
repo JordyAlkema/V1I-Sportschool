@@ -23,7 +23,7 @@ class ApiController extends Controller
             ->where('eind_datum', null)
             ->first();
 
-        if($user->balance > 4){
+        if($user->balance < 4){
             return response('The users balance is too low', 410);
         }
 
