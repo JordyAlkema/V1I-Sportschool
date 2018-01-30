@@ -19,7 +19,7 @@ class GymGate:
     def __init__(self):
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
-        self.RFID = RFID()
+        self.RFID = RFID(pin_mode=GPIO.BCM)
         self.display = Display()
         self.LED_green = LED(GPIO, 9)
         self.LED_red = LED(GPIO, 18)
