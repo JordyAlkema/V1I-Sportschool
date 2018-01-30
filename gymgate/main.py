@@ -9,6 +9,8 @@ from src.LED import LED
 from src.config import AUTOMAAT
 from src.display import Display
 from src.repository import gymgate_repository
+from src.servo import Servo
+
 from pirc522 import RFID
 
 
@@ -22,6 +24,7 @@ class GymGate:
         self.is_running = True
         self.RFID = RFID(bus=0, device=1)
         self.display = Display()
+        self.servo = Servo()
         self.LED_green = LED(GPIO, 40)
         self.LED_red = LED(GPIO, 12)
 
@@ -62,7 +65,7 @@ class GymGate:
                     self.LED_green.turn_on()
 
                     self.display.show_message(u"\rHallo " + user_data['user']['voornaam'])
-
+                    self.servo.rotate_open()
                     time.sleep(2)
 
                     if user_data['activeActiviteit'] is not None:
@@ -71,6 +74,8 @@ class GymGate:
                     else:
                         self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0]["id"], AUTOMAAT[0]["api_key"])
                         self.display.show_message(u"\rIngecheckt")
+
+                    self.servo.rotate_close()
 
                 else:
                     self.show_error()
