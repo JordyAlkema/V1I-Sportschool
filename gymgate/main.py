@@ -47,6 +47,7 @@ class GymGate:
                     self.display.show_message(u"Kaart gevonden")
 
                     card_uid = format_card_uid(uid)
+                    print(card_uid)
 
                     user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
                     if user_data.status_code == 404:
