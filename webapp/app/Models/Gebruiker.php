@@ -100,7 +100,11 @@ class Gebruiker extends Eloquent implements Authenticatable
             ->orderby('eind_datum', 'DESC')
             ->first();
 
-        return $abonnementenGebruiker->eind_datum->toDateString();
+        if($abonnementenGebruiker){
+            return $abonnementenGebruiker->eind_datum->toDateString();
+        }else{
+            return null;
+        }
 	}
 
 	public function getKcalVerbrandAttribute()

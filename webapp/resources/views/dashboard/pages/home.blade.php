@@ -38,7 +38,12 @@
                 </div>
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">date_range</i> Geldig tot {{$user->AbonnementTill}}
+                        <i class="material-icons">date_range</i>
+                        @if($user->AbonnementTill)
+                             Geldig tot {{$user->AbonnementTill}}
+                        @else
+                            Geldig voor altijd
+                        @endif
                     </div>
                 </div>
             </div>
