@@ -54,15 +54,15 @@ class GymGate:
 #                        continue
 
                     user_id = user_data['user']['id']
-                    self.display.show_message(u"welkom: " + user_data['user']['voornaam'])
+                    self.display.show_message(u"\rHallo " + user_data['user']['voornaam'])
                     time.sleep(2)
 
                     if user_data['activeActiviteit'] is not None:
                         self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0]["id"], AUTOMAAT[0]["api_key"])
-                        self.display.show_message(u"U bent uitgecheckt")
+                        self.display.show_message(u"\rUitgecheckt")
                     else:
                         self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0]["id"], AUTOMAAT[0]["api_key"])
-                        self.display.show_message(u"U bent ingecheckt")
+                        self.display.show_message(u"\rIngecheckt")
 
                     time.sleep(5)
 
