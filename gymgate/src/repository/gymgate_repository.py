@@ -15,8 +15,8 @@ class GymgateRepository:
 
     def do_check_in(self, user_id, automaat_id, api_key):
         req = requests.post(self.host + '/api/checkIn', data={'user_id': user_id, 'automaat_id': automaat_id, 'api_key': api_key})
-        return req.json()
+	return req.status_code
 
     def do_check_out(self, user_id, automaat_id, api_key):
         req = requests.post(self.host + '/api/checkOut', data={'user_id': user_id, 'automaat_id': automaat_id, 'api_key': api_key})
-        return req.json()
+	return req.status_code
