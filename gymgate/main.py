@@ -72,12 +72,12 @@ class GymGate:
                         self.gymgate_repository.do_check_in(user_id, AUTOMAAT[0]["id"], AUTOMAAT[0]["api_key"])
                         self.display.show_message(u"\rIngecheckt")
 
-                    time.sleep(5)
-
                 else:
                     self.show_error()
             else:
                 self.show_error()
+
+            time.sleep(2)
 
     def show_error(self):
         self.LED_green.turn_off()
