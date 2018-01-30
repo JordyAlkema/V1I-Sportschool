@@ -20,7 +20,7 @@ class GymGate:
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
         self.MIFAREReader = MFRC522()
-        self.display = Display()
+        # self.display = Display()
         self.LED_green = LED(GPIO, 9)
         self.LED_red = LED(GPIO, 18)
 
@@ -47,7 +47,7 @@ class GymGate:
                 # Turn on the light
                 self.LED_red.turn_on()
                 self.LED_green.turn_on()
-                self.display.show_message("Kaart gevonden")
+                # self.display.show_message("Kaart gevonden")
 
                 card_uid = format_card_uid(uid)
 
@@ -56,7 +56,7 @@ class GymGate:
                     continue
 
                 user_id = user_data['user']['id']
-                self.display.show_message("welkom: " + user_data['user']['voornaam'])
+                # self.display.show_message("welkom: " + user_data['user']['voornaam'])
 
                 if user_data['activeActiviteit'] is not None:
                     self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
