@@ -23,6 +23,10 @@ class ApiController extends Controller
             ->where('eind_datum', null)
             ->first();
 
+        if($user->balance > 4){
+            return response('The users balance is too low', 410);
+        }
+
         if($activeActiviteit){
             return response('User is already checked in', 409);
         }
@@ -61,15 +65,18 @@ class ApiController extends Controller
 
             $price = $activiteit->begin_datum->diffInMinutes($activiteit->eind_datum) * $automaat->bedrag_per_minuut;
 
-            $transactie = new Transactie();
 
-            $transactie->user_id = $user->id;
-            $transactie->transactieType_id = 1;
-            $transactie->bedrag = $price;
-            $transactie->datum = Carbon::now();
-            $transactie->activiteit_id = $activiteit->id;
+            if(!$user->abonnement){
+                $transactie = new Transactie();
 
-            $transactie->save();
+                $transactie->user_id = $user->id;
+                $transactie->transactieType_id = 1;
+                $transactie->bedrag = $price;
+                $transactie->datum = Carbon::now();
+                $transactie->activiteit_id = $activiteit->id;
+
+                $transactie->save();
+            }
 
             return response('', 200);
         }else{

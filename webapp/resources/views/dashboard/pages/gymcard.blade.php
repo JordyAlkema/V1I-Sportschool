@@ -87,6 +87,37 @@
             </div>
             </a>
         </div>
+    </div>
 
+    <h2>Abonnementen</h2>
+    <div class="row">
+        @foreach(\App\Models\Abonnement::all() as $abonnement)
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <a href="{{ route('action.BuyAbonnement', ['id' => $abonnement->id]) }}">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="orange">
+                            <i class="material-icons">card_membership</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">{{$abonnement->naam}}</p>
+                            <h3 class="title">{{$abonnement->prijs}}
+                                <small>Euro</small>
+                            </h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <span class="pull-right">
+                                    @if($abonnement->aantal_maanden > 1)
+                                        {{$abonnement->aantal_maanden}} Maanden
+                                    @else
+                                        {{$abonnement->aantal_maanden}} Maand
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        @endforeach
     </div>
 @endsection

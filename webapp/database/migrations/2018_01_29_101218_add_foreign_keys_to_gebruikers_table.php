@@ -30,7 +30,7 @@ class AddForeignKeysToGebruikersTable extends Migration
     public function down()
     {
         //
-        Schema::table('transacties', function(Blueprint $table) {
+        Schema::table('gebruikers', function(Blueprint $table) {
             $table->dropForeign('gebruiker-rol');
             $table->dropForeign('medewerker-locatie');
         });

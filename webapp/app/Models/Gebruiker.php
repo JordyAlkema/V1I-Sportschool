@@ -6,6 +6,7 @@
  */
 
 namespace App\Models;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Reliese\Database\Eloquent\Model as Eloquent;
@@ -72,6 +73,43 @@ class Gebruiker extends Eloquent implements Authenticatable
 	public function rol()
 	{
 		return $this->belongsTo(Rol::class, 'rol_id');
+	}
+
+	public function abonnementen()
+	{
+		return $this->belongsToMany(Abonnement::class, 'gebruiker_abonnement');
+	}
+
+	public function getAbonnementAttribute()
+	{
+
+		$gebruikerAbbonement = GebruikerAbonnement::where('gebruiker_id', $this->id)
+                                                    ->where('begin_datum', '>=' , Carbon::now()->toDateString())
+                                                    ->where('eind_datum', '<=', Carbon::now()->addMonth()->toDateString())
+                                                    ->first();
+        if($gebruikerAbbonement){
+            $gebruikerAbbonement['abbonement'] = Abonnement::find($gebruikerAbbonement['abonnement_id']);
+        }
+
+        return $gebruikerAbbonement;
+	}
+
+    public function getAbonnementTillAttribute()
+    {
+        $abonnementenGebruiker = GebruikerAbonnement::where('gebruiker_id', $this->id)
+            ->orderby('eind_datum', 'DESC')
+            ->first();
+
+        return $abonnementenGebruiker->eind_datum->toDateString();
+	}
+
+	public function getKcalVerbrandAttribute()
+    {
+        $abonnementenGebruiker = GebruikerAbonnement::where('gebruiker_id', $this->id)
+            ->orderby('eind_datum', 'DESC')
+            ->first();
+
+        return $abonnementenGebruiker->eind_datum->toDateString();
 	}
 
 	public function getBalanceAttribute(){
