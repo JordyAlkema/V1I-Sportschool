@@ -23,10 +23,10 @@ class GymGate:
         self.is_running = True
         # self.RFID = RFID(pin_mode=GPIO.BCM, bus=0, device=1)
 
-        self.RFID = RFID(pin_mode=GPIO.BCM, bus=0, device=1, pin_irq=24, pin_ce=7)
+        self.RFID = RFID(bus=0, device=1)
         self.display = Display()
-        self.LED_green = LED(GPIO, 9)
-        self.LED_red = LED(GPIO, 18)
+        self.LED_green = LED(GPIO, 21)
+        self.LED_red = LED(GPIO, 12)
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -76,6 +76,6 @@ class GymGate:
         sys.exit()
 
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
 GymGate()
