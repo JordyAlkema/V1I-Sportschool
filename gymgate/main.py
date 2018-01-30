@@ -22,8 +22,8 @@ class GymGate:
         self.is_running = True
         self.RFID = RFID(bus=0, device=1)
         self.display = Display()
-#        self.LED_green = LED(GPIO, 21)
-#        self.LED_red = LED(GPIO, 12)
+        self.LED_green = LED(GPIO, 40)
+        self.LED_red = LED(GPIO, 12)
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -42,17 +42,16 @@ class GymGate:
                 if not error:
                     print("UID: " + str(uid))
                     # Turn on the light
-#                    self.LED_red.turn_on()
-#                    self.LED_green.turn_on()
+                    self.LED_red.turn_on()
+                    self.LED_green.turn_on()
                     self.display.show_message(u"\rKaart gevonden")
                     time.sleep(1)
-                    self.display.show_message(u"\rKaart gevonden")
                     card_uid = format_card_uid(uid)
                     print(card_uid)
 
                     user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
-#                    if user_data.status_code == 404:
-#                        continue
+                   if user_data.status_code == 404:
+                       continue
                     user_id = user_data['user']['id']
 
                     self.display.show_message(u"\rHallo " + user_data['user']['voornaam'])
