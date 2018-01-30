@@ -24,7 +24,7 @@ class GymGate:
         self.is_running = True
         self.RFID = RFID(bus=0, device=1)
         self.display = Display()
-        self.servo = Servo()
+        self.servo = Servo(GPIO)
         self.LED_green = LED(GPIO, 40)
         self.LED_red = LED(GPIO, 12)
 
