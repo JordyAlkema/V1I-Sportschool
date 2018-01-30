@@ -5,9 +5,9 @@ import sys
 
 import RPi.GPIO as GPIO
 
-# from src.LED import LED
-# from src.display import Display
+from src.LED import LED
 from src.config import AUTOMAAT
+from src.display import Display
 from src.repository import gymgate_repository
 from pirc522 import RFID
 
@@ -21,9 +21,9 @@ class GymGate:
         self.gymgate_repository = gymgate_repository.GymgateRepository()
         self.is_running = True
         self.RFID = RFID(bus=0, device=1)
-        # self.display = Display()
-        # self.LED_green = LED(GPIO, 21)
-        # self.LED_red = LED(GPIO, 12)
+        self.display = Display()
+        self.LED_green = LED(GPIO, 21)
+        self.LED_red = LED(GPIO, 12)
 
         signal.signal(signal.SIGINT, self.close_program)
 
@@ -42,9 +42,9 @@ class GymGate:
                 if not error:
                     print("UID: " + str(uid))
                     # Turn on the light
-                    # self.LED_red.turn_on()
-                    # self.LED_green.turn_on()
-                    # self.display.show_message("Kaart gevonden")
+                    self.LED_red.turn_on()
+                    self.LED_green.turn_on()
+                    self.display.show_message(u"Kaart gevonden")
 
                     card_uid = format_card_uid(uid)
 
@@ -53,7 +53,7 @@ class GymGate:
                         continue
 
                     user_id = user_data['user']['id']
-                    # self.display.show_message("welkom: " + user_data['user']['voornaam'])
+                    self.display.show_message(u"welkom: " + user_data['user']['voornaam'])
 
                     if user_data['activeActiviteit'] is not None:
                         self.gymgate_repository.do_check_out(user_id, AUTOMAAT[0].id, AUTOMAAT[0].api_key)
@@ -62,14 +62,14 @@ class GymGate:
 
                     time.sleep(5)
 
-            # else:
-            #     self.LED_red.turn_off()
+            else:
+                self.LED_red.turn_off()
 
     def close_program(self, signal, frame):
         print("Ctrl+C captured, ending read.")
         self.is_running = False
         self.RFID.cleanup()
-        # self.display.close()
+        self.display.close()
         GPIO.cleanup()
         sys.exit()
 
