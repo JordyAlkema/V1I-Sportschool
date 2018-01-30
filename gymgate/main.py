@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 import signal
 import time
+import sys
 
 import RPi.GPIO as GPIO
 
@@ -69,7 +70,7 @@ class GymGate:
         self.is_running = False
         self.RFID.cleanup()
         GPIO.cleanup()
-
+        sys.exit()
 
 GPIO.setmode(GPIO.BCM)
 
