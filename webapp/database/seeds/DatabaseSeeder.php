@@ -29,6 +29,16 @@ class DatabaseSeeder extends Seeder
             'beheerder' => true,
         ]);
 
+        factory(\App\Models\Automaat::class)->create([
+            'api_key' => 'Hlv80ShcFEjhrAHLd4ylcacHg4iWnbjwgF6MdAYAB1t9nUcjScHkxDl'
+        ]);
+
+        factory(\App\Models\Gebruiker::class)->create([
+            'voornaam' => 'Jason',
+            'achternaam' => 'test',
+            'pasnummer' => '160.99.145.94'
+        ]);
+
         $this->call([
             GebruikerSeeder::class
         ]);
