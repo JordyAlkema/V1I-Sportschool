@@ -34,27 +34,34 @@ class GymGate:
 
     def start_program(self):
         while self.is_running:
+            self.LED_green.turn_off()
+            self.LED_red.turn_off()
+
             self.RFID.wait_for_tag()
             (error, tag_type) = self.RFID.request()
+
             if not error:
                 print("Tag detected")
                 (error, uid) = self.RFID.anticoll()
                 if not error:
                     print("UID: " + str(uid))
+
                     # Turn on the light
-                    self.LED_red.turn_on()
-                    self.LED_green.turn_on()
                     self.display.show_message(u"\rKaart gevonden")
                     time.sleep(1)
+
                     card_uid = format_card_uid(uid)
                     print(card_uid)
 
                     user_data = self.gymgate_repository.get_user_status_by_card_uid(card_uid)
-                   if user_data.status_code == 404:
-                       continue
                     user_id = user_data['user']['id']
+                    if user_id is None:
+                        self.LED_red.turn_on()
+                        continue
 
+                    self.LED_green.turn_on()
                     self.display.show_message(u"\rHallo " + user_data['user']['voornaam'])
+
                     time.sleep(2)
 
                     if user_data['activeActiviteit'] is not None:
