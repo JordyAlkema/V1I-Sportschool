@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return \Illuminate\Support\Facades\Auth::user()->abonnement;
-});
+    Route::get('/', 'AuthController@registerView');
 
     /**
      * Login
