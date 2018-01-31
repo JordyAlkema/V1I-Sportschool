@@ -1,0 +1,3 @@
+SERVER_HOST = "192.168.42.7:8000"
+
+LOCATION = "Amersfoort"
