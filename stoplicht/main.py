@@ -46,6 +46,7 @@ class GymGate:
             time.sleep(4)
 
     def close_program(self, signal, frame):
+        """ Sluit het programma correct af met daarbij ook de GPIO pinnen opschonen """
         print("Ctrl+C captured, ending read.")
         self.is_running = False
         GPIO.cleanup()
