@@ -131,7 +131,8 @@ class DatabaseSeeder extends Seeder
         factory(\App\Models\Gebruiker::class)->create([
             'voornaam' => 'Jason',
             'achternaam' => 'test',
-            'pasnummer' => '160.99.145.94'
+            'pasnummer' => '160.99.145.94',
+            'rol' => 1
         ]);
 
         $this->call([
