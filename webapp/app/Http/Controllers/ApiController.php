@@ -104,4 +104,23 @@ class ApiController extends Controller
 
         return response($response);
     }
+
+    public function trafficIndicator()
+    {
+        $activiteiten  = Activiteiten::where('eind_datum', null)->get();
+
+        $peopleActive = ($activiteiten);
+
+        if($peopleActive == 0){
+            $color = 'green';
+        }elseif($peopleActive = 1){
+            $color = 'orange';
+        }else{
+            $color = 'red';
+        }
+
+        return [
+          'indicator' => $color
+        ];
+    }
 }

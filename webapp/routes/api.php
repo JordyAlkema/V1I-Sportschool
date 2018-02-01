@@ -17,3 +17,5 @@ Route::post('user', 'ApiController@user')->name('api.User');
 
 Route::post('checkIn', 'ApiController@checkIn')->name('api.CheckIn');
 Route::post('checkOut', 'ApiController@checkOut')->name('api.CheckOut');
+
+Route::post('trafficIndicator', 'ApiController@trafficIndicator')->name('api.trafficIndicator');
