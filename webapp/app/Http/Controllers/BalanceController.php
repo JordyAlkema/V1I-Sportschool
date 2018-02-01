@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class BalanceController extends Controller
 {
-    //
+    /**
+     * @param $add
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addBalance($add)
     {
         $user = Auth::user();
@@ -27,6 +30,10 @@ class BalanceController extends Controller
         return redirect()->route('dashboard')->with('success', $add . ' Euro is bijgeschreven');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function BuyAbonnement($id)
     {
         $user = Auth::user();

@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    //
+    /**
+     * @return $this
+     */
     public function homeView()
     {
         $gebruiker = Auth::user();
@@ -42,11 +44,17 @@ class DashboardController extends Controller
             ->with('latestTransaction', $latestTransaction);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function homeViewMedewerker()
     {
         return view('dashboard.pages.medewerker.home');
     }
 
+    /**
+     * @return $this
+     */
     public function gebruikersViewMedewerker()
     {
         $gebruikers = Gebruiker::where('rol_id', 1)
@@ -56,6 +64,9 @@ class DashboardController extends Controller
             ->with('gebruikers', $gebruikers);
     }
 
+    /**
+     * @return $this
+     */
     public function gymCardView()
     {
         $gebruiker = Auth::user();
@@ -73,6 +84,9 @@ class DashboardController extends Controller
             ->with('latestTransaction', $latestTransaction);
     }
 
+    /**
+     * @return $this
+     */
     public function activitiesView()
     {
         $gebruiker = Auth::user();
@@ -81,6 +95,9 @@ class DashboardController extends Controller
         return view('dashboard.pages.activities')->with('activiteiten', $activiteiten);
     }
 
+    /**
+     * @return $this
+     */
     public function transactionsView()
     {
         $gebruiker = Auth::user();
@@ -89,6 +106,10 @@ class DashboardController extends Controller
         return view('dashboard.pages.transactions')->with('transacties', $transacties);
     }
 
+    /**
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function activityTransaction($id)
     {
         $gebruiker = Auth::user();
@@ -102,6 +123,9 @@ class DashboardController extends Controller
 
     }
 
+    /**
+     * @return $this
+     */
     public function personalCoachView()
     {
         $medewerkers = Gebruiker::where('rol_id', 2)
@@ -111,11 +135,18 @@ class DashboardController extends Controller
             ->with('medewerkers', $medewerkers);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function locationsView()
     {
         return view('dashboard.pages.locations');
     }
 
+    /**
+     * @param $id
+     * @return $this
+     */
     public function gebruikerViewMedewerker($id)
     {
         $gebruiker = Gebruiker::find($id);
