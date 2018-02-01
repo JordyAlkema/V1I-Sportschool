@@ -98,7 +98,12 @@
                             <tr>
                                 <td>{{$activiteit->automaat->automaattype->naam}}</td>
                                 <td>{{$activiteit->begin_datum}}</td>
-                                <td>{{$activiteit->tijd}} Minuten</td>
+                                <td>@if(is_int($activiteit->tijd))
+                                        {{$activiteit->tijd}} Minuten
+                                    @else
+                                        {{$activiteit->tijd}}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
