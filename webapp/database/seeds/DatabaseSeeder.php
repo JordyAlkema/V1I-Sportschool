@@ -132,7 +132,7 @@ class DatabaseSeeder extends Seeder
             'voornaam' => 'Jason',
             'achternaam' => 'test',
             'pasnummer' => '160.99.145.94',
-            'rol' => 1
+            'rol_id' => 1
         ]);
 
         $this->call([
