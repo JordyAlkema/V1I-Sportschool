@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    //
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function loginView()
     {
         if(Auth::check() && !session('error')){
@@ -21,6 +23,10 @@ class AuthController extends Controller
         return view('login');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(LoginRequest $request)
     {
         $gebruiker = Gebruiker::where('email', strtolower($request['email']))->first();
@@ -39,6 +45,9 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();
@@ -49,11 +58,18 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'U bent uitgelogd!');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function registerView()
     {
         return view('register');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function register(Request $request)
     {
         $gebruiker = new Gebruiker();

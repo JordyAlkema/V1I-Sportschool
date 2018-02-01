@@ -9,13 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    //
+    /**
+     * @return $this
+     */
     public function profileView()
     {
         $gebruiker = Auth::user();
         return view('dashboard.pages.user')->with('gebruiker', $gebruiker);
     }
 
+    /**
+     * @param UserUpdateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function profileUpdate(UserUpdateRequest $request)
     {
         $gebruiker = Gebruiker::find(Auth::id());
@@ -31,6 +37,11 @@ class UserController extends Controller
         return redirect()->route('dashboard')->with('success','Profiel is opgeslagen!');
     }
 
+    /**
+     * @param UserUpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function profileUpdateMedewerker(UserUpdateRequest $request, $id)
     {
         $gebruiker = Gebruiker::find($id);
@@ -46,6 +57,9 @@ class UserController extends Controller
         return redirect()->route('medewerker.dashboard')->with('success','Profiel is opgeslagen!');
     }
 
+    /**
+     * @return $this
+     */
     public function profileViewMedewerker()
     {
         $gebruiker = Auth::user();

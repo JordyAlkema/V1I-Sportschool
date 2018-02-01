@@ -13,7 +13,10 @@ use App\Http\Requests\CheckRequest;
 
 class ApiController extends Controller
 {
-    //
+    /**
+     * @param CheckRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function checkIn(CheckRequest $request)
     {
         $user = Gebruiker::find($request['user_id']);
@@ -46,6 +49,10 @@ class ApiController extends Controller
         }
     }
 
+    /**
+     * @param CheckRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function checkOut(CheckRequest $request)
     {
         $user = Gebruiker::find($request['user_id']);
@@ -84,6 +91,10 @@ class ApiController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function user(Request $request)
     {
         $cardnummer = $request['cardnumber'];
@@ -105,6 +116,9 @@ class ApiController extends Controller
         return response($response);
     }
 
+    /**
+     * @return array
+     */
     public function trafficIndicator()
     {
         $activiteiten  = Activiteiten::where('eind_datum', null)->get();

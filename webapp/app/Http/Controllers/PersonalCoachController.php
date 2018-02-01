@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonalCoachController extends Controller
 {
-    //
+    /**
+     * @param SendMessageRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function sendMessage(SendMessageRequest $request)
     {
         $user = Auth::user();
