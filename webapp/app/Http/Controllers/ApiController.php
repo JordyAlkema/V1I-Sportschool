@@ -78,7 +78,7 @@ class ApiController extends Controller
 
                 $transactie->user_id = $user->id;
                 $transactie->transactieType_id = 1;
-                $transactie->bedrag = $price;
+                $transactie->bedrag = -$price;
                 $transactie->datum = Carbon::now();
                 $transactie->activiteit_id = $activiteit->id;
 

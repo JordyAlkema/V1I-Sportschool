@@ -14,7 +14,7 @@
     <li {{ (Route::currentRouteName() == 'medewerker.gebruikers' ? 'class=active' : '') }}>
         <a href="{{ route('medewerker.gebruikers') }}">
             <i class="material-icons">add_location</i>
-            <p>Gebruiker</p>
+            <p>Gebruikers</p>
         </a>
     </li>
 </ul>
