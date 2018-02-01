@@ -123,7 +123,7 @@ class ApiController extends Controller
     {
         $activiteiten  = Activiteiten::where('eind_datum', null)->get();
 
-        $peopleActive = ($activiteiten);
+        $peopleActive = count($activiteiten);
 
         if($peopleActive == 0){
             $color = 'green';
