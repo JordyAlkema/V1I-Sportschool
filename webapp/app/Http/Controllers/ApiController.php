@@ -127,7 +127,7 @@ class ApiController extends Controller
 
         if($peopleActive == 0){
             $color = 'green';
-        }elseif($peopleActive = 1){
+        }else if($peopleActive == 1){
             $color = 'orange';
         }else{
             $color = 'red';
