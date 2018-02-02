@@ -17,9 +17,9 @@ class GymGate:
         self.is_running = True
 
         # TODO: Change pins to correct ones, according to GPIO.BOARD
-        self.LED_green = LED(GPIO, 40)
-        self.LED_orange = LED(GPIO, 12)
-        self.LED_red = LED(GPIO, 12)
+        self.LED_green = LED(GPIO, 8)
+        self.LED_orange = LED(GPIO, 16)
+        self.LED_red = LED(GPIO, 36)
 
         signal.signal(signal.SIGINT, self.close_program)
 
