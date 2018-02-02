@@ -28,7 +28,7 @@
                         <td>{{$gebruiker->balance}}</td>
                         <td>
                             @if($gebruiker->abonnement)
-                                {{$gebruiker->abonnement->abbonement->naam}}
+                                {{$gebruiker->abonnement->abonnement->naam}}
                             @else
                                 Flexibel
                             @endif
