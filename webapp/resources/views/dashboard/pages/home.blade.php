@@ -28,7 +28,7 @@
                 <div class="card-content">
                     <p class="category">Abonnement</p>
                     <h3 class="title">
-                    @if($user->abonnement)
+                    @if($user->abonnement  && isset($user->abonnement->abonnement->naam))
                         {{$user->abonnement->abonnement->naam}}
                     @else
                         Flexibel
