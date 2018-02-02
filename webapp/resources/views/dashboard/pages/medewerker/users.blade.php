@@ -26,7 +26,13 @@
                         <td>{{$gebruiker->tussenvoegsel}}</td>
                         <td>{{$gebruiker->achternaam}}</td>
                         <td>{{$gebruiker->balance}}</td>
-                        <td>Flexibel</td>
+                        <td>
+                            @if($gebruiker->abonnement)
+                                {{$gebruiker->abonnement->abbonement->naam}}
+                            @else
+                                Flexibel
+                            @endif
+                        </td>
                         <td><a href="{{route('medewerker.gebruiker', ['id' => $gebruiker->id])}}">Wijzig</a></td>
                     </tr>
                 @endforeach

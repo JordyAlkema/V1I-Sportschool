@@ -4,6 +4,6 @@
             <script>
                 document.write(new Date().getFullYear())
             </script>
-            <a>IDP</a>, made with love for a better web
+            IDP Project, Groep 1
         </p>
     </div>

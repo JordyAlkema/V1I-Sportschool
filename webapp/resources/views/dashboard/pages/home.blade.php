@@ -29,7 +29,7 @@
                     <p class="category">Abonnement</p>
                     <h3 class="title">
                     @if($user->abonnement)
-                        {{$user->abonnement->abbonement->naam}}
+                        {{$user->abonnement->abonnement->naam}}
                     @else
                         Flexibel
                     @endif

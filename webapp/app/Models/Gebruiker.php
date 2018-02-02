@@ -85,10 +85,9 @@ class Gebruiker extends Eloquent implements Authenticatable
 
 		$gebruikerAbbonement = GebruikerAbonnement::where('gebruiker_id', $this->id)
                                                     ->where('begin_datum', '>=' , Carbon::now()->toDateString())
-                                                    ->where('eind_datum', '<=', Carbon::now()->addMonth()->toDateString())
                                                     ->first();
         if($gebruikerAbbonement){
-            $gebruikerAbbonement['abbonement'] = Abonnement::find($gebruikerAbbonement['abonnement_id']);
+            $gebruikerAbbonement['abonnement'] = Abonnement::find($gebruikerAbbonement['abonnement_id']);
         }
 
         return $gebruikerAbbonement;

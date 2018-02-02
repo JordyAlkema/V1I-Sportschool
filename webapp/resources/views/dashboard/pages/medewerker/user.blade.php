@@ -77,6 +77,7 @@
                         <th>Machine</th>
                         <th>Begintijd</th>
                         <th>Tijd op machine</th>
+                        <th>Kcal</th>
                         </thead>
                         <tbody>
                         @foreach($gebruiker->activiteiten as $activiteit)
@@ -84,6 +85,7 @@
                                 <td>{{$activiteit->automaat->automaattype->naam}}</td>
                                 <td>{{$activiteit->begin_datum}}</td>
                                 <td>{{$activiteit->tijd}}</td>
+                                <td>{{$activiteit->kcal}}</td>
                             </tr>
                         @endforeach
                         </tbody>

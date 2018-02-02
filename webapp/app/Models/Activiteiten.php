@@ -72,4 +72,19 @@ class Activiteiten extends Eloquent
 
         return $tijd;
 	}
+
+    public function getKcalAttribute()
+    {
+
+        $tijd = $this->getTijdAttribute();
+
+        if(is_int($this->getTijdAttribute())){
+            $kcal = $this->getTijdAttribute() * $this->automaat['kcal_per_minuut'];
+
+            return $kcal;
+        }else{
+            return $tijd;
+        }
+
+	}
 }
